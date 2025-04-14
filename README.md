@@ -32,6 +32,7 @@
 ## RNs (Regras de Negócio)
 
 - [x] O usuário não pode se cadastrar com um e-mail já existente;
+- [x] O usuário deve cadastrar pelo menos 2 preferencias de leitura para categoria e escritor; 
 - [ ] O usuário só pode gerar uma avaliação após finalizar a leitura do livro;
 - [ ] O usuário só pode editar ou excluir avaliações feitas por ele mesmo;
 - [ ] O usuário deve permanecer logado por meio do sistema de autenticação com refresh token;
