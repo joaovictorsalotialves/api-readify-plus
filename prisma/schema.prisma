@@ -16,5 +16,83 @@ model User {
   passwordRecoveryCode String?  @map("password_recovery_code")
   createdAt            DateTime @default(now()) @map("created_at")
 
+  favoriteWriters    FavoriteWritersOfUser[]
+  favoriteCategories FavoriteCategoriesBookOfUser[]
+  favoriteBooks      FavoriteBooksOfUser[]
+
   @@map("users")
+}
+
+model FavoriteWritersOfUser {
+  writer   Writer @relation(fields: [writerId], references: [id])
+  writerId String @map("writer_id")
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  @@id([userId, writerId])
+  @@map("favorites_writers_of_users")
+}
+
+model FavoriteCategoriesBookOfUser {
+  BookCategory   BookCategory @relation(fields: [bookCategoryId], references: [id])
+  bookCategoryId String       @map("book_category_id")
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  @@id([userId, bookCategoryId])
+  @@map("favorites_categories_book_of_users")
+}
+
+model FavoriteBooksOfUser {
+  book   Book   @relation(fields: [bookId], references: [id])
+  bookId String @map("book_id")
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  @@id([userId, bookId])
+  @@map("favorites_books_of_users")
+}
+
+model Book {
+  id         String @id @default(uuid())
+  title      String
+  urlCover   String @map("url_cover")
+  bookPath   String @map("book_path")
+  synopsis   String
+  publisher  String
+  numberPage String @map("number_page")
+  language   String
+  ISBN       String
+
+  writer   Writer @relation(fields: [writerId], references: [id])
+  writerId String @map("writer_id")
+
+  category         BookCategory          @relation(fields: [bookCategoryId], references: [id])
+  bookCategoryId   String                @map("book_category_id")
+  favoritedByUsers FavoriteBooksOfUser[]
+
+  @@map("books")
+}
+
+model BookCategory {
+  id   String @id @default(uuid())
+  name String
+
+  books            Book[]
+  favoritedByUsers FavoriteCategoriesBookOfUser[]
+
+  @@map("book_categories")
+}
+
+model Writer {
+  id   String @id @default(uuid())
+  name String
+
+  books            Book[]
+  favoritedByUsers FavoriteWritersOfUser[]
+
+  @@map("writers")
 }

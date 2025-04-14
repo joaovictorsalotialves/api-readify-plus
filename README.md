@@ -40,7 +40,7 @@
 
 ## RNFs (Requisitos Não Funcionais)
 
-- [ ] A senha do usuário deve estar criptografada;
+- [x] A senha do usuário deve estar criptografada;
 - [ ] Os dados da aplicação devem estar persistidos em um banco PostgreSQL;
 - [ ] Todas as listas de livros devem ser paginadas com 10 livros por página;
 - [ ] Todas as listas de avaliações devem ser paginadas com 5 avaliações por página;
