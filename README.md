@@ -5,7 +5,7 @@
 ## RFs (Requisitos Funcionais)
 
 - [x] Deve ser possível se cadastrar com dados para identificação e acesso do usuário;
-- [ ] Deve ser possível cadastrar as preferencias de leitura do usuário;
+- [x] Deve ser possível cadastrar as preferencias de leitura do usuário (categoria e escritor);
 - [ ] Deve ser possível se autenticar;
 - [ ] Deve ser possível recuperar a senha;
 - [ ] Deve ser possível obter o perfil do usuário logado;

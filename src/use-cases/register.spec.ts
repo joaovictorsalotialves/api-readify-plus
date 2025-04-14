@@ -14,7 +14,20 @@ describe('Register Use Case', () => {
     sut = new RegisterUseCase(usersRepository)
   })
 
-  it('should be able to register', async () => {
+  it('should be able to register with their preferences', async () => {
+    const { user } = await sut.execute({
+      username: 'John Doe 123',
+      name: 'John Doe',
+      email: 'johndoe@example.com',
+      password: '123456',
+      favoriteCategories: ['book-category-1', 'book-category-2'],
+      favoriteWriters: ['writer-1', 'writer-2'],
+    })
+
+    expect(user.id).toEqual(expect.any(String))
+  })
+
+  it('should be able to register without their preferences', async () => {
     const { user } = await sut.execute({
       username: 'John Doe 123',
       name: 'John Doe',
