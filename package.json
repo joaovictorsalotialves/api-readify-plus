@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "tsx watch src/server.ts"
+    "start:dev": "tsx watch src/server.ts",
+    "start": "node build/server.js",
+    "build": "tsup src --out-dir build",
+    "test": "vitest run --dir src/use-cases",
+    "test:watch": "vitest --dir src/use-cases",
+    "test:coverage": "vitest run --coverage",
+    "test:ui": "vitest --ui"
   },
   "keywords": [],
   "author": "",
@@ -11,7 +17,8 @@
   "type": "commonjs",
   "description": "",
   "dependencies": {
-    "@prisma/client": "6.6.0",
+    "@prisma/client": "6.5.0",
+    "bcryptjs": "3.0.2",
     "dotenv": "^16.5.0",
     "fastify": "^5.2.2",
     "zod": "^3.24.2"
@@ -19,9 +26,13 @@
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
     "@types/node": "^22.14.0",
-    "prisma": "6.6.0",
+    "@vitest/coverage-v8": "3.1.1",
+    "@vitest/ui": "3.1.1",
+    "prisma": "6.5.0",
     "tsup": "^8.4.0",
     "tsx": "^4.19.3",
-    "typescript": "^5.8.2"
+    "typescript": "^5.8.2",
+    "vite-tsconfig-paths": "5.1.4",
+    "vitest": "3.1.1"
   }
 }

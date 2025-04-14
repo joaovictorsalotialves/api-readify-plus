@@ -4,7 +4,8 @@
 
 ## RFs (Requisitos Funcionais)
 
-- [ ] Deve ser possível se cadastrar;
+- [x] Deve ser possível se cadastrar com dados para identificação e acesso do usuário;
+- [ ] Deve ser possível cadastrar as preferencias de leitura do usuário;
 - [ ] Deve ser possível se autenticar;
 - [ ] Deve ser possível recuperar a senha;
 - [ ] Deve ser possível obter o perfil do usuário logado;
@@ -30,7 +31,7 @@
 
 ## RNs (Regras de Negócio)
 
-- [ ] O usuário não pode se cadastrar com um e-mail já existente;
+- [x] O usuário não pode se cadastrar com um e-mail já existente;
 - [ ] O usuário só pode gerar uma avaliação após finalizar a leitura do livro;
 - [ ] O usuário só pode editar ou excluir avaliações feitas por ele mesmo;
 - [ ] O usuário deve permanecer logado por meio do sistema de autenticação com refresh token;
