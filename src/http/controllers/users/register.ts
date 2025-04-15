@@ -10,6 +10,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     name: z.string(),
     email: z.string().email(),
     password: z.string().min(6),
+    passwordConfirmation: z.string().min(6),
     favoriteCategories: z.array(z.string()).min(2),
     favoriteWriters: z.array(z.string()).min(2),
   })
@@ -19,6 +20,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     name,
     email,
     password,
+    passwordConfirmation,
     favoriteCategories,
     favoriteWriters,
   } = registerBodySchema.parse(request.body)
@@ -31,6 +33,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
       name,
       email,
       password,
+      passwordConfirmation,
       favoriteCategories,
       favoriteWriters,
     })

@@ -41,10 +41,6 @@ export class InMemoryUsersRepository implements UsersRepository {
           bookCategoryId: item,
         })
       })
-
-      if (this.favoriteCategories.length !== data.favoriteCategories.length) {
-        throw new Error('Failed to register favorite categories')
-      }
     }
 
     if (data.favoriteWriters.length > 0) {
@@ -54,10 +50,6 @@ export class InMemoryUsersRepository implements UsersRepository {
           writerId: item,
         })
       })
-
-      if (this.favoriteWriters.length !== data.favoriteWriters.length) {
-        throw new Error('Failed to register favorite writers')
-      }
     }
 
     this.items.push(user)

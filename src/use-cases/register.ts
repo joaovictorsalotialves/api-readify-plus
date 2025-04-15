@@ -1,13 +1,15 @@
-import type { UsersRepository } from '@/repositories/users-repository'
 import type { User } from '@prisma/client'
 import { hash } from 'bcryptjs'
+import type { UsersRepository } from '@/repositories/users-repository'
 import { UserAlreadyExistsError } from './errors/user-already-exists-error'
+import { PasswordConfirmationMismatchError } from './errors/password-confirmation-mismatch-error'
 
 interface RegisterUseCaseRequest {
   username: string
   name: string
   email: string
   password: string
+  passwordConfirmation: string
 
   favoriteCategories: string[] // A list of book category IDs
   favoriteWriters: string[] // A list of writer IDs
@@ -25,9 +27,14 @@ export class RegisterUseCase {
     name,
     email,
     password,
+    passwordConfirmation,
     favoriteCategories,
     favoriteWriters,
   }: RegisterUseCaseRequest): Promise<RegisterUseCaseResponse> {
+    if (password !== passwordConfirmation) {
+      throw new PasswordConfirmationMismatchError()
+    }
+
     const passwordHash = await hash(password, 6)
 
     const userWithSameEmail = await this.usersRepository.findByEmail(email)
