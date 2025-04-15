@@ -9,8 +9,8 @@ interface RegisterUseCaseRequest {
   email: string
   password: string
 
-  favoriteCategories?: string[] // A list of book category IDs
-  favoriteWriters?: string[] // A list of writer IDs
+  favoriteCategories: string[] // A list of book category IDs
+  favoriteWriters: string[] // A list of writer IDs
 }
 
 interface RegisterUseCaseResponse {
@@ -25,8 +25,8 @@ export class RegisterUseCase {
     name,
     email,
     password,
-    favoriteCategories = [],
-    favoriteWriters = [],
+    favoriteCategories,
+    favoriteWriters,
   }: RegisterUseCaseRequest): Promise<RegisterUseCaseResponse> {
     const passwordHash = await hash(password, 6)
 
