@@ -3,13 +3,14 @@ import { generateRecoveryCode } from '@/utils/generate-recovery-code'
 import type { MailProvider } from '@/providers/MailProvider'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 import { generateEmailRecoveryPassword } from '@/utils/generate-email-recovery-password'
+import type { User } from '@prisma/client'
 
 interface SendEmailToRecoveryPasswordUseCaseRequest {
   email: string
 }
 
 interface SendEmailToRecoveryPasswordUseCaseResponse {
-  userId: string
+  user: User
 }
 
 export class SendEmailToRecoveryPasswordUseCase {
@@ -42,7 +43,7 @@ export class SendEmailToRecoveryPasswordUseCase {
     })
 
     return {
-      userId: user.id,
+      user,
     }
   }
 }
