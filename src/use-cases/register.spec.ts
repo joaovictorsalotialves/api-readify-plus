@@ -28,7 +28,7 @@ describe('Register Use Case', () => {
     expect(user.id).toEqual(expect.any(String))
   })
 
-  it('should not be able to register', async () => {
+  it('should not be able to register with wrong password confirmation', async () => {
     await expect(() =>
       sut.execute({
         username: 'John Doe 123',
