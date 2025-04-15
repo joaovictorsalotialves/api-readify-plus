@@ -31,17 +31,17 @@ export class RegisterUseCase {
     favoriteCategories,
     favoriteWriters,
   }: RegisterUseCaseRequest): Promise<RegisterUseCaseResponse> {
-    if (password !== passwordConfirmation) {
-      throw new PasswordConfirmationMismatchError()
-    }
-
-    const passwordHash = await hash(password, 6)
-
     const userWithSameEmail = await this.usersRepository.findByEmail(email)
 
     if (userWithSameEmail) {
       throw new UserAlreadyExistsError()
     }
+
+    if (password !== passwordConfirmation) {
+      throw new PasswordConfirmationMismatchError()
+    }
+
+    const passwordHash = await hash(password, 6)
 
     const user = await this.usersRepository.create({
       username,

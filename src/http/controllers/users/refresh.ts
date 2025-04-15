@@ -1,3 +1,4 @@
+import { generateTokens } from '@/utils/generate-tokens'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 
 export async function refresh(request: FastifyRequest, reply: FastifyReply) {
@@ -5,24 +6,9 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
 
   const { sub } = request.user
 
-  const token = await reply.jwtSign(
-    {},
-    {
-      sign: {
-        sub,
-      },
-    }
-  )
-
-  const refreshToken = await reply.jwtSign(
-    {},
-    {
-      sign: {
-        sub,
-        expiresIn: '7d',
-      },
-    }
-  )
+  const { token, refreshToken } = await generateTokens(reply, {
+    sub,
+  })
 
   return reply
     .setCookie('refreshToken', refreshToken, {

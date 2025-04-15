@@ -3,6 +3,7 @@ import { z } from 'zod'
 
 import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error'
 import { makeAuthenticateUseCase } from '@/use-cases/factories/make-authenticate-use-case'
+import { generateTokens } from '@/utils/generate-tokens'
 
 export async function authenticate(
   request: FastifyRequest,
@@ -23,24 +24,9 @@ export async function authenticate(
       password,
     })
 
-    const token = await reply.jwtSign(
-      {},
-      {
-        sign: {
-          sub: user.id,
-        },
-      }
-    )
-
-    const refreshToken = await reply.jwtSign(
-      {},
-      {
-        sign: {
-          sub: user.id,
-          expiresIn: '7d',
-        },
-      }
-    )
+    const { token, refreshToken } = await generateTokens(reply, {
+      sub: user.id,
+    })
 
     return reply
       .setCookie('refreshToken', refreshToken, {
