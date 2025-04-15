@@ -7,6 +7,7 @@ export type CreateUserInput = Prisma.UserCreateInput & {
 }
 
 export interface UsersRepository {
+  findById(id: string): Promise<User | null>
   findByEmail(email: string): Promise<User | null>
   create(data: CreateUserInput): Promise<User>
   save(data: User): Promise<User>

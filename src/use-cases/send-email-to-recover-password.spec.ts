@@ -10,7 +10,7 @@ let usersRepository: InMemoryUsersRepository
 let mailtrapMailProvider: FakeMailProvider
 let sut: SendEmailToRecoverPasswordUseCase
 
-describe('Send Email To Recovery Password Use Case', () => {
+describe('Send Email To Recover Password Use Case', () => {
   beforeEach(() => {
     usersRepository = new InMemoryUsersRepository()
     mailtrapMailProvider = new FakeMailProvider()
