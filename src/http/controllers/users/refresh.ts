@@ -2,7 +2,7 @@ import { generateTokens } from '@/utils/generate-tokens'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 
 export async function refresh(request: FastifyRequest, reply: FastifyReply) {
-  await request.jwtVerify({ onlyCookie: true })
+  await request.jwtVerify()
 
   const { sub } = request.user
 
@@ -10,15 +10,8 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
     sub,
   })
 
-  return reply
-    .setCookie('refreshToken', refreshToken, {
-      path: '/',
-      secure: true,
-      sameSite: true,
-      httpOnly: true,
-    })
-    .status(200)
-    .send({
-      token,
-    })
+  return reply.status(200).send({
+    token,
+    refreshToken,
+  })
 }

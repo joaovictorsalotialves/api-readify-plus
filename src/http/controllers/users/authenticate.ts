@@ -28,17 +28,10 @@ export async function authenticate(
       sub: user.id,
     })
 
-    return reply
-      .setCookie('refreshToken', refreshToken, {
-        path: '/',
-        secure: true,
-        sameSite: true,
-        httpOnly: true,
-      })
-      .status(200)
-      .send({
-        token,
-      })
+    return reply.status(200).send({
+      token,
+      refreshToken,
+    })
   } catch (err) {
     if (err instanceof InvalidCredentialsError) {
       return reply.status(400).send({
