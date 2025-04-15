@@ -31,8 +31,8 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
       name,
       email,
       password,
-      favoriteCategories: favoriteCategories ?? [],
-      favoriteWriters: favoriteWriters ?? [],
+      favoriteCategories,
+      favoriteWriters,
     })
   } catch (err) {
     if (err instanceof UserAlreadyExistsError) {
