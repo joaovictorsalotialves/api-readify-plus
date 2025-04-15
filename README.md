@@ -35,7 +35,7 @@
 - [x] O usuário deve cadastrar pelo menos 2 preferencias de leitura para categoria e escritor; 
 - [ ] O usuário só pode gerar uma avaliação após finalizar a leitura do livro;
 - [ ] O usuário só pode editar ou excluir avaliações feitas por ele mesmo;
-- [ ] O usuário deve permanecer logado por meio do sistema de autenticação com refresh token;
+- [x] O usuário deve permanecer logado por meio do sistema de autenticação com refresh token;
 - [ ] As recomendações de livros devem levar em consideração os gêneros, escritores e o progresso e engajamento do usuário na leitura;
 - [ ] A funcionalidade de leitura em voz alta deve estar disponível para todos os livros, como recurso de acessibilidade;
 
@@ -48,6 +48,6 @@
 - [x] O usuário deve ser identificado por um JWT (JSON Web Token);
 - [x] O usuário pode obter um novo JWT por meio de um refresh token (quando já estiver logado);
 - [ ] Os livros devem ser armazenados em arquivos PDF;
-- [ ] Para recuperação de senha, o usuário deve receber um e-mail com um código de 6 dígitos;
+- [x] Para recuperação de senha, o usuário deve receber um e-mail com um código de 6 dígitos;
 - [ ] As respostas das recomendações baseadas em IA devem ser entregues em até 2 segundos para manter a fluidez da experiência;
 - [ ] O processamento de dados sensíveis para recomendações deve seguir políticas de privacidade e anonimização;
