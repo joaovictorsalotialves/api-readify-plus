@@ -4,7 +4,7 @@ import { z } from 'zod'
 import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error'
 import { makeSendEmailToRecoveryPasswordUseCase } from '@/use-cases/factories/make-send-email-to-recovery-password'
 
-export async function sendEmailToRecoveryPassword(
+export async function sendEmailToRecoverPassword(
   request: FastifyRequest,
   reply: FastifyReply
 ) {

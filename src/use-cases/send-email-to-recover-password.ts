@@ -1,19 +1,19 @@
 import type { UsersRepository } from '@/repositories/users-repository'
-import { generateRecoveryCode } from '@/utils/generate-recovery-code'
+import { generatePasswordRecoveryCode } from '@/utils/generate-password-recovery-code'
 import type { MailProvider } from '@/providers/MailProvider'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
-import { generateEmailRecoveryPassword } from '@/utils/generate-email-recovery-password'
+import { generateEmailRecoveryPassword } from '@/utils/generate-email-recover-password'
 import type { User } from '@prisma/client'
 
-interface SendEmailToRecoveryPasswordUseCaseRequest {
+interface SendEmailToRecoverPasswordUseCaseRequest {
   email: string
 }
 
-interface SendEmailToRecoveryPasswordUseCaseResponse {
+interface SendEmailToRecoverPasswordUseCaseResponse {
   user: User
 }
 
-export class SendEmailToRecoveryPasswordUseCase {
+export class SendEmailToRecoverPasswordUseCase {
   constructor(
     private usersRepository: UsersRepository,
     private mailProvider: MailProvider
@@ -21,14 +21,14 @@ export class SendEmailToRecoveryPasswordUseCase {
 
   async execute({
     email,
-  }: SendEmailToRecoveryPasswordUseCaseRequest): Promise<SendEmailToRecoveryPasswordUseCaseResponse> {
+  }: SendEmailToRecoverPasswordUseCaseRequest): Promise<SendEmailToRecoverPasswordUseCaseResponse> {
     const user = await this.usersRepository.findByEmail(email)
 
     if (!user) {
       throw new ResourceNotFoundError()
     }
 
-    const recoveryCode = generateRecoveryCode()
+    const recoveryCode = generatePasswordRecoveryCode()
     user.passwordRecoveryCode = recoveryCode
 
     await this.usersRepository.save(user)

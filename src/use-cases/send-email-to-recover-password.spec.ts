@@ -2,19 +2,19 @@ import { expect, describe, it, beforeEach } from 'vitest'
 import { hash } from 'bcryptjs'
 
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
-import { SendEmailToRecoveryPasswordUseCase } from './send-email-to-recovery-password'
+import { SendEmailToRecoverPasswordUseCase } from './send-email-to-recover-password'
 import { FakeMailProvider } from '@/providers/implementations/FakeMailProvider'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 let usersRepository: InMemoryUsersRepository
 let mailtrapMailProvider: FakeMailProvider
-let sut: SendEmailToRecoveryPasswordUseCase
+let sut: SendEmailToRecoverPasswordUseCase
 
 describe('Send Email To Recovery Password Use Case', () => {
   beforeEach(() => {
     usersRepository = new InMemoryUsersRepository()
     mailtrapMailProvider = new FakeMailProvider()
-    sut = new SendEmailToRecoveryPasswordUseCase(
+    sut = new SendEmailToRecoverPasswordUseCase(
       usersRepository,
       mailtrapMailProvider
     )
