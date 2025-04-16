@@ -7,7 +7,7 @@
 - [x] Deve ser possível se cadastrar com dados para identificação e acesso do usuário;
 - [x] Deve ser possível cadastrar as preferencias de leitura do usuário (categoria e escritor);
 - [x] Deve ser possível se autenticar;
-- [ ] Deve ser possível recuperar a senha;
+- [x] Deve ser possível redefinir a senha;
 - [ ] Deve ser possível obter o perfil do usuário logado;
 - [ ] Deve ser possível atualizar as informações do usuário logado;
 - [ ] Deve ser possível alterar a senha do usuário logado;
@@ -42,7 +42,7 @@
 ## RNFs (Requisitos Não Funcionais)
 
 - [x] A senha do usuário deve estar criptografada;
-- [ ] Os dados da aplicação devem estar persistidos em um banco PostgreSQL;
+- [x] Os dados da aplicação devem estar persistidos em um banco PostgreSQL;
 - [ ] Todas as listas de livros devem ser paginadas com 10 livros por página;
 - [ ] Todas as listas de avaliações devem ser paginadas com 5 avaliações por página;
 - [x] O usuário deve ser identificado por um JWT (JSON Web Token);

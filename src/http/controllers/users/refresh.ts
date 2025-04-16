@@ -1,4 +1,4 @@
-import { generateTokens } from '@/utils/generate-tokens'
+import { generateToken } from '@/utils/generate-token'
 import type { FastifyRequest, FastifyReply } from 'fastify'
 
 export async function refresh(request: FastifyRequest, reply: FastifyReply) {
@@ -6,9 +6,22 @@ export async function refresh(request: FastifyRequest, reply: FastifyReply) {
 
   const { sub } = request.user
 
-  const { token, refreshToken } = await generateTokens(reply, {
-    sub,
-  })
+  const token = await generateToken(
+    reply,
+    {},
+    {
+      sub,
+    }
+  )
+
+  const refreshToken = await generateToken(
+    reply,
+    {},
+    {
+      sub,
+      expiresIn: '7d',
+    }
+  )
 
   return reply.status(200).send({
     token,

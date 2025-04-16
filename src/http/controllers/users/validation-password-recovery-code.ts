@@ -3,6 +3,7 @@ import { z } from 'zod'
 
 import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error'
 import { makeValidationPasswordRecoveryUseCase } from '@/use-cases/factories/make-validation-password-recovery-code-use-case'
+import { generateToken } from '@/utils/generate-token'
 
 export async function validationRecoverPasswordCode(
   request: FastifyRequest,
@@ -29,9 +30,12 @@ export async function validationRecoverPasswordCode(
       passwordRecoveryCode,
     })
 
-    const resetPasswordToken = await reply.jwtSign(
-      { passwordRecoveryCode: user.passwordRecoveryCode },
-      { sign: { sub: user.id } }
+    const resetPasswordToken = await generateToken(
+      reply,
+      { passwordRecoveryCode: user.passwordRecoveryCode as string },
+      {
+        sub: user.id,
+      }
     )
 
     return reply.status(200).send({
