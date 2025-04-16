@@ -45,6 +45,7 @@ export class ResetPasswordUseCase {
     const passwordHash = await hash(password, 6)
 
     user.passwordHash = passwordHash
+    user.passwordRecoveryCode = null
 
     await this.usersRepository.save(user)
 

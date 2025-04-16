@@ -2,7 +2,7 @@ import type { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
 import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error'
-import { makeValidationPasswordRecoveryUseCase } from '@/use-cases/factories/make-validation-password-recovery-code'
+import { makeValidationPasswordRecoveryUseCase } from '@/use-cases/factories/make-validation-password-recovery-code-use-case'
 
 export async function validationRecoverPasswordCode(
   request: FastifyRequest,

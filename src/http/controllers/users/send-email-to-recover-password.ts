@@ -2,7 +2,7 @@ import type { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
 import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error'
-import { makeSendEmailToRecoverPasswordUseCase } from '@/use-cases/factories/make-send-email-to-recovery-password'
+import { makeSendEmailToRecoverPasswordUseCase } from '@/use-cases/factories/make-send-email-to-recovery-password-use-case'
 
 export async function sendEmailToRecoverPassword(
   request: FastifyRequest,
