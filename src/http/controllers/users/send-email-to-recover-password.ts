@@ -2,23 +2,23 @@ import type { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
 import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error'
-import { makeSendEmailToRecoveryPasswordUseCase } from '@/use-cases/factories/make-send-email-to-recovery-password'
+import { makeSendEmailToRecoverPasswordUseCase } from '@/use-cases/factories/make-send-email-to-recovery-password'
 
 export async function sendEmailToRecoverPassword(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  const sendEmailToRecoveryPasswordBodySchema = z.object({
+  const sendEmailToRecoverPasswordBodySchema = z.object({
     email: z.string().email(),
   })
 
-  const { email } = sendEmailToRecoveryPasswordBodySchema.parse(request.body)
+  const { email } = sendEmailToRecoverPasswordBodySchema.parse(request.body)
 
   try {
-    const sendEmailToRecoveryPasswordUseCase =
-      makeSendEmailToRecoveryPasswordUseCase()
+    const sendEmailToRecoverPasswordUseCase =
+      makeSendEmailToRecoverPasswordUseCase()
 
-    const { user } = await sendEmailToRecoveryPasswordUseCase.execute({
+    const { user } = await sendEmailToRecoverPasswordUseCase.execute({
       email,
     })
 
