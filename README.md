@@ -14,6 +14,7 @@
 - [ ] Deve ser possível atualizar o modo de leitura do usuário logado;
 - [ ] Deve ser possível obter os livros que estão sendo lidos pelo usuário logado;
 - [ ] Deve ser possível obter os livros lidos pelo usuário logado;
+- [ ] Deve ser possível obter a quantidade de livros lidos usuário logado;
 - [ ] Deve ser possível obter os livros favoritos do usuário logado;
 - [ ] Deve ser possível obter os livros sugeridos ao usuário logado (Sistema de recomendação com I.A.);
 - [ ] Deve ser possível obter os livros mais populares da plataforma;
@@ -26,6 +27,7 @@
 - [ ] Deve ser possível gerar uma avaliação após a leitura do livro;
 - [ ] Deve ser possível editar a avaliação do livro feita pelo usuário;
 - [ ] Deve ser possível excluir a avaliação do livro feita pelo usuário;
+- [ ] Deve ser possível obter a quantidade de comentarios feitos pelo usuário logado;
 - [ ] Deve ser possível obter a quantidade de visitas na página de um livro;
 - [ ] Deve ser possível controlar o progresso da leitura do livro;
 
