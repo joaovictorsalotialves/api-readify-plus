@@ -8,7 +8,7 @@
 - [x] Deve ser possível cadastrar as preferencias de leitura do usuário (categoria e escritor);
 - [x] Deve ser possível se autenticar;
 - [x] Deve ser possível redefinir a senha;
-- [ ] Deve ser possível obter o perfil do usuário logado;
+- [x] Deve ser possível obter o perfil do usuário logado;
 - [ ] Deve ser possível atualizar as informações do usuário logado;
 - [ ] Deve ser possível alterar a senha do usuário logado;
 - [ ] Deve ser possível atualizar o modo de leitura do usuário logado;
