@@ -19,9 +19,9 @@ export async function editUserProfile(
   )
 
   try {
-    const registerUseCase = makeEditUserProfileUseCase()
+    const editUserProfileUseCase = makeEditUserProfileUseCase()
 
-    const { user } = await registerUseCase.execute({
+    const { user } = await editUserProfileUseCase.execute({
       userId: request.user.sub,
       username,
       name,
