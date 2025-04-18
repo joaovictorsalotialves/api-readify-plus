@@ -1,9 +1,9 @@
 import type { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error'
 import { makeSendEmailToRecoverPasswordUseCase } from '@/use-cases/factories/make-send-email-to-recovery-password-use-case'
 import { generateToken } from '@/utils/generate-token'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
 
 export async function sendEmailToRecoverPassword(
   request: FastifyRequest,
@@ -35,8 +35,8 @@ export async function sendEmailToRecoverPassword(
       recoveryPasswordToken,
     })
   } catch (error) {
-    if (error instanceof InvalidCredentialsError) {
-      return reply.status(400).send({
+    if (error instanceof ResourceNotFoundError) {
+      return reply.status(404).send({
         message: error.message,
       })
     }
