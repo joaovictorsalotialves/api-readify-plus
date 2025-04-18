@@ -4,7 +4,7 @@ import { z } from 'zod'
 export const getUserProfileDoc = {
   onRequest: [verifyJWT],
   schema: {
-    summary: 'Register user',
+    summary: 'Get user profile',
     tags: ['user'],
     response: {
       200: z.object({

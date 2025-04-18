@@ -12,6 +12,7 @@ import { editPassword } from '../controllers/users/edit-password'
 
 import { registerDoc } from './users/docs/register'
 import { getUserProfileDoc } from './users/docs/get-user-profile'
+import { editUserProfileDoc } from './users/docs/edit-user-profile'
 
 export async function usersRoutes(app: FastifyInstance) {
   app.post('/users', registerDoc, register)
@@ -21,6 +22,6 @@ export async function usersRoutes(app: FastifyInstance) {
   app.post('/recovery-password/validate-code', validationRecoverPasswordCode)
   app.post('/recovery-password/reset-password', resetPasswordCode)
   app.get('/me', getUserProfileDoc, getUserProfile)
-  app.put('/users', { onRequest: [verifyJWT] }, editUserProfile)
+  app.put('/users', editUserProfileDoc, editUserProfile)
   app.put('/users/password', { onRequest: [verifyJWT] }, editPassword)
 }

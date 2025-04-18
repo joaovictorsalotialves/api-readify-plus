@@ -1,20 +1,14 @@
 import type { FastifyRequest, FastifyReply } from 'fastify'
-import { z } from 'zod'
 
 import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error'
 import { makeEditUserProfileUseCase } from '@/use-cases/factories/make-edit-user-use-case'
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
+import { editUserProfileBodySchema } from './edit-user-profile-schema'
 
 export async function editUserProfile(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  const editUserProfileBodySchema = z.object({
-    username: z.string(),
-    name: z.string(),
-    email: z.string().email(),
-  })
-
   const { username, name, email } = editUserProfileBodySchema.parse(
     request.body
   )
