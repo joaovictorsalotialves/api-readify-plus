@@ -1,21 +1,12 @@
 import type { FastifyRequest, FastifyReply } from 'fastify'
-import { z } from 'zod'
 
 import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error'
 import { makeRegisterUseCase } from '@/use-cases/factories/make-register-use-case'
 import { PasswordConfirmationMismatchError } from '@/use-cases/errors/password-confirmation-mismatch-error'
+import { registerBodySchema } from './register-schema'
+import { generateToken } from '@/utils/generate-token'
 
 export async function register(request: FastifyRequest, reply: FastifyReply) {
-  const registerBodySchema = z.object({
-    username: z.string(),
-    name: z.string(),
-    email: z.string().email(),
-    password: z.string().min(6),
-    passwordConfirmation: z.string().min(6),
-    favoriteCategories: z.array(z.string()).min(2),
-    favoriteWriters: z.array(z.string()).min(2),
-  })
-
   const {
     username,
     name,
@@ -29,7 +20,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
   try {
     const registerUseCase = makeRegisterUseCase()
 
-    await registerUseCase.execute({
+    const { user } = await registerUseCase.execute({
       username,
       name,
       email,
@@ -37,6 +28,28 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
       passwordConfirmation,
       favoriteCategories,
       favoriteWriters,
+    })
+
+    const token = await generateToken(
+      reply,
+      {},
+      {
+        sub: user.id,
+      }
+    )
+
+    const refreshToken = await generateToken(
+      reply,
+      {},
+      {
+        sub: user.id,
+        expiresIn: '7d',
+      }
+    )
+
+    return reply.status(201).send({
+      token,
+      refreshToken,
     })
   } catch (err) {
     if (err instanceof UserAlreadyExistsError) {
@@ -53,6 +66,4 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 
     throw err
   }
-
-  return reply.status(201).send()
 }

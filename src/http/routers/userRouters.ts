@@ -10,8 +10,10 @@ import { verifyJWT } from '../middlewares/verify-jwt'
 import { editUserProfile } from '../controllers/users/edit-user-profile'
 import { editPassword } from '../controllers/users/edit-password'
 
+import { registerDoc } from './users/docs/register'
+
 export async function usersRoutes(app: FastifyInstance) {
-  app.post('/users', register)
+  app.post('/users', registerDoc, register)
   app.post('/sessions', authenticate)
   app.patch('/token/refresh', refresh)
   app.post('/recovery-password/send-email', sendEmailToRecoverPassword)

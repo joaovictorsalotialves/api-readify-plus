@@ -2,7 +2,6 @@ import fastify from 'fastify'
 import fastifyJwt from '@fastify/jwt'
 import { usersRoutes } from './http/routers/userRouters'
 import { env } from './env'
-import { ZodError } from 'zod'
 import {
   type ZodTypeProvider,
   jsonSchemaTransform,
@@ -40,18 +39,16 @@ app.register(fastifyJwt, {
 
 app.register(usersRoutes)
 
-app.setErrorHandler((error, _, reply) => {
-  if (error instanceof ZodError) {
-    return reply
-      .status(400)
-      .send({ message: 'Validation error', issues: error.format() })
+app.setErrorHandler((err, _, reply) => {
+  if (err.validation && err.code === 'FST_ERR_VALIDATION') {
+    return reply.status(400).send({ message: 'Validation error!' })
   }
 
   if (env.NODE_ENV !== 'production') {
-    console.error(error)
+    console.error(err)
   } else {
     // TODO: Here we should log to on external tool like DataDog/NewRelic/Sentry
   }
 
-  return reply.status(500).send({ message: 'Internal server error.' })
+  return reply.status(500).send({ message: 'Internal server error!' })
 })
