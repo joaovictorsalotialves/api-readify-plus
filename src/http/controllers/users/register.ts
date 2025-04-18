@@ -3,6 +3,7 @@ import { z } from 'zod'
 
 import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error'
 import { makeRegisterUseCase } from '@/use-cases/factories/make-register-use-case'
+import { PasswordConfirmationMismatchError } from '@/use-cases/errors/password-confirmation-mismatch-error'
 
 export async function register(request: FastifyRequest, reply: FastifyReply) {
   const registerBodySchema = z.object({
@@ -40,6 +41,12 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
   } catch (err) {
     if (err instanceof UserAlreadyExistsError) {
       return reply.status(409).send({
+        message: err.message,
+      })
+    }
+
+    if (err instanceof PasswordConfirmationMismatchError) {
+      return reply.status(400).send({
         message: err.message,
       })
     }
