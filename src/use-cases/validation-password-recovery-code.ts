@@ -33,8 +33,6 @@ export class ValidationPasswordRecoveryCodeUseCase {
       throw new InvalidPasswordRecoveryCodeError()
     }
 
-    return {
-      user,
-    }
+    return { user }
   }
 }

@@ -1,9 +1,10 @@
 import type { FastifyRequest, FastifyReply } from 'fastify'
 import { z } from 'zod'
 
-import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error'
 import { makeValidationPasswordRecoveryUseCase } from '@/use-cases/factories/make-validation-password-recovery-code-use-case'
 import { generateToken } from '@/utils/generate-token'
+import { InvalidPasswordRecoveryCodeError } from '@/use-cases/errors/invalid-password-recovery-code-error'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
 
 export async function validationRecoverPasswordCode(
   request: FastifyRequest,
@@ -42,7 +43,13 @@ export async function validationRecoverPasswordCode(
       resetPasswordToken,
     })
   } catch (error) {
-    if (error instanceof InvalidCredentialsError) {
+    if (error instanceof ResourceNotFoundError) {
+      return reply.status(404).send({
+        message: error.message,
+      })
+    }
+
+    if (error instanceof InvalidPasswordRecoveryCodeError) {
       return reply.status(400).send({
         message: error.message,
       })
