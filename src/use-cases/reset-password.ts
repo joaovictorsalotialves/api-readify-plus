@@ -49,8 +49,6 @@ export class ResetPasswordUseCase {
 
     await this.usersRepository.save(user)
 
-    return {
-      user,
-    }
+    return { user }
   }
 }
