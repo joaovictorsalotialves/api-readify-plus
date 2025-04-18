@@ -9,9 +9,18 @@ export const editUserProfileDoc = {
     tags: ['user'],
     body: editUserProfileBodySchema,
     response: {
-      201: z.object({ token: z.string(), refreshToken: z.string() }),
+      200: z.object({
+        user: z.object({
+          id: z.string(),
+          name: z.string(),
+          username: z.string(),
+          email: z.string(),
+          createdAt: z.date(),
+        }),
+      }),
       409: z.object({ message: z.string() }),
       400: z.object({ message: z.string() }),
+      404: z.object({ message: z.string() }),
     },
   },
 }

@@ -27,6 +27,7 @@ export async function editUserProfile(
       user: {
         ...user,
         passwordHash: undefined,
+        passwordRecoveryCode: undefined,
       },
     })
   } catch (err) {
