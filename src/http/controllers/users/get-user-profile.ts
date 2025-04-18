@@ -14,6 +14,7 @@ export async function getUserProfile(
     return reply.status(200).send({
       user: {
         ...user,
+        passwordRecoveryCode: undefined,
         passwordHash: undefined,
       },
     })
