@@ -17,6 +17,7 @@ export const getUserProfileDoc = {
         }),
       }),
       404: z.object({ message: z.string() }),
+      401: z.object({ message: z.string() }),
     },
   },
 }
