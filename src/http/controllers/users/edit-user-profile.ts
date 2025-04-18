@@ -3,6 +3,7 @@ import { z } from 'zod'
 
 import { UserAlreadyExistsError } from '@/use-cases/errors/user-already-exists-error'
 import { makeEditUserProfileUseCase } from '@/use-cases/factories/make-edit-user-use-case'
+import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
 
 export async function editUserProfile(
   request: FastifyRequest,
@@ -37,6 +38,12 @@ export async function editUserProfile(
   } catch (err) {
     if (err instanceof UserAlreadyExistsError) {
       return reply.status(409).send({
+        message: err.message,
+      })
+    }
+
+    if (err instanceof ResourceNotFoundError) {
+      return reply.status(404).send({
         message: err.message,
       })
     }
