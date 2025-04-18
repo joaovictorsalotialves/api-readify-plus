@@ -52,8 +52,6 @@ export class EditPasswordUseCase {
 
     await this.usersRepository.save(user)
 
-    return {
-      user,
-    }
+    return { user }
   }
 }
