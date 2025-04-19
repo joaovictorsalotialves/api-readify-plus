@@ -1,10 +1,10 @@
 import type { FastifyRequest, FastifyReply } from 'fastify'
-import { z } from 'zod'
 
 import { makeValidationPasswordRecoveryUseCase } from '@/use-cases/factories/make-validation-password-recovery-code-use-case'
 import { generateToken } from '@/utils/generate-token'
 import { InvalidPasswordRecoveryCodeError } from '@/use-cases/errors/invalid-password-recovery-code-error'
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
+import { validateRecoveryPasswordCodeBodySchema } from './validation-password-recovery-code-schema'
 
 export async function validationRecoverPasswordCode(
   request: FastifyRequest,
@@ -13,10 +13,6 @@ export async function validationRecoverPasswordCode(
   await request.jwtVerify()
 
   const { sub } = request.user
-
-  const validateRecoveryPasswordCodeBodySchema = z.object({
-    passwordRecoveryCode: z.string().length(6),
-  })
 
   const { passwordRecoveryCode } = validateRecoveryPasswordCodeBodySchema.parse(
     request.body
