@@ -1,18 +1,14 @@
 import type { FastifyRequest, FastifyReply } from 'fastify'
-import { z } from 'zod'
 
 import { makeSendEmailToRecoverPasswordUseCase } from '@/use-cases/factories/make-send-email-to-recovery-password-use-case'
 import { generateToken } from '@/utils/generate-token'
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
+import { sendEmailToRecoverPasswordBodySchema } from './send-email-to-recover-password-schema'
 
 export async function sendEmailToRecoverPassword(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  const sendEmailToRecoverPasswordBodySchema = z.object({
-    email: z.string().email(),
-  })
-
   const { email } = sendEmailToRecoverPasswordBodySchema.parse(request.body)
 
   try {
