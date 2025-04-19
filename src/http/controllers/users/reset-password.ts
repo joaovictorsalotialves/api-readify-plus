@@ -1,11 +1,11 @@
 import type { FastifyRequest, FastifyReply } from 'fastify'
-import { z } from 'zod'
 
 import { makeResetPasswordUseCase } from '@/use-cases/factories/make-reset-password-use-case'
 import { generateToken } from '@/utils/generate-token'
 import { InvalidCredentialsError } from '@/use-cases/errors/invalid-credentials-error'
 import { PasswordConfirmationMismatchError } from '@/use-cases/errors/password-confirmation-mismatch-error'
 import { ResourceNotFoundError } from '@/use-cases/errors/resource-not-found-error'
+import { resetPasswordBodySchema } from './reset-password-schema'
 
 export async function resetPasswordCode(
   request: FastifyRequest,
@@ -14,11 +14,6 @@ export async function resetPasswordCode(
   await request.jwtVerify()
 
   const { sub, passwordRecoveryCode } = request.user
-
-  const resetPasswordBodySchema = z.object({
-    password: z.string().length(6),
-    passwordConfirmation: z.string().length(6),
-  })
 
   const { password, passwordConfirmation } = resetPasswordBodySchema.parse(
     request.body

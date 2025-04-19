@@ -9,6 +9,7 @@ import { authenticateDoc } from './docs/authenticate'
 import { refreshDoc } from './docs/refresh'
 import { sendEmailToRecoverPasswordDoc } from './docs/send-email-to-recover-password'
 import { validationPasswordRecoveryCodeDoc } from './docs/validation-password-recovery-code'
+import { resetPasswordDoc } from './docs/reset-password'
 
 export async function authRoutes(app: FastifyInstance) {
   app.post('/sessions', authenticateDoc, authenticate)
@@ -23,5 +24,9 @@ export async function authRoutes(app: FastifyInstance) {
     validationPasswordRecoveryCodeDoc,
     validationRecoverPasswordCode
   )
-  app.post('/recovery-password/reset-password', resetPasswordCode)
+  app.post(
+    '/recovery-password/reset-password',
+    resetPasswordDoc,
+    resetPasswordCode
+  )
 }
