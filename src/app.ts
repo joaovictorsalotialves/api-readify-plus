@@ -1,7 +1,5 @@
 import fastify from 'fastify'
 import fastifyJwt from '@fastify/jwt'
-import { usersRoutes } from './http/routers/userRouters'
-import { env } from './env'
 import {
   type ZodTypeProvider,
   jsonSchemaTransform,
@@ -10,6 +8,10 @@ import {
 } from 'fastify-type-provider-zod'
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUi from '@fastify/swagger-ui'
+import { env } from './env'
+
+import { usersRoutes } from './http/routers/users/userRouters'
+import { authRoutes } from './http/routers/auth/authRouters'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -37,6 +39,7 @@ app.register(fastifyJwt, {
   },
 })
 
+app.register(authRoutes)
 app.register(usersRoutes)
 
 app.setErrorHandler((err, _, reply) => {
