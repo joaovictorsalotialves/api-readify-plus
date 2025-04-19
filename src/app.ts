@@ -47,6 +47,10 @@ app.setErrorHandler((err, _, reply) => {
     return reply.status(400).send({ message: 'Validation error!' })
   }
 
+  if (err.code === 'FST_JWT_AUTHORIZATION_TOKEN_EXPIRED') {
+    return reply.status(401).send({ message: 'Token expired!' })
+  }
+
   if (env.NODE_ENV !== 'production') {
     console.error(err)
   } else {
