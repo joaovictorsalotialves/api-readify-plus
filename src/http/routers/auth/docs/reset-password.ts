@@ -1,4 +1,4 @@
-import { resetPasswordBodySchema } from '@/http/controllers/users/reset-password-schema'
+import { resetPasswordBodySchema } from '@/http/controllers/auth/reset-password-schema'
 import { z } from 'zod'
 
 export const resetPasswordDoc = {

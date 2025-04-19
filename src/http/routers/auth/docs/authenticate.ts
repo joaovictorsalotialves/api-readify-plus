@@ -1,4 +1,4 @@
-import { authenticateBodySchema } from '@/http/controllers/users/authenticate-schema'
+import { authenticateBodySchema } from '@/http/controllers/auth/authenticate-schema'
 import { z } from 'zod'
 
 export const authenticateDoc = {

@@ -1,4 +1,4 @@
-import { sendEmailToRecoverPasswordBodySchema } from '@/http/controllers/users/send-email-to-recover-password-schema'
+import { sendEmailToRecoverPasswordBodySchema } from '@/http/controllers/auth/send-email-to-recover-password-schema'
 import { z } from 'zod'
 
 export const sendEmailToRecoverPasswordDoc = {

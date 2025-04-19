@@ -1,4 +1,4 @@
-import { validateRecoveryPasswordCodeBodySchema } from '@/http/controllers/users/validation-password-recovery-code-schema'
+import { validateRecoveryPasswordCodeBodySchema } from '@/http/controllers/auth/validation-password-recovery-code-schema'
 import { z } from 'zod'
 
 export const validationPasswordRecoveryCodeDoc = {
