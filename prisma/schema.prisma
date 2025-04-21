@@ -20,7 +20,23 @@ model User {
   favoriteCategories FavoriteCategoriesBookOfUser[]
   favoriteBooks      FavoriteBooksOfUser[]
 
+  readingSetting ReadingSetting?
+
   @@map("users")
+}
+
+model ReadingSetting {
+  id               String  @id @default(uuid())
+  fontFamily       String  @map("font_family")
+  fontSize         Decimal @map("font_size")
+  fontSpacing      String  @map("font_spacing")
+  screenBrightness Decimal @map("screen_brightness")
+  theme            String
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @unique
+
+  @@map("reading_settings")
 }
 
 model FavoriteWritersOfUser {
