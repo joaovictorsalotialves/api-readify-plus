@@ -5,6 +5,7 @@ import { makeRegisterUseCase } from '@/use-cases/factories/make-register-use-cas
 import { PasswordConfirmationMismatchError } from '@/use-cases/errors/password-confirmation-mismatch-error'
 import { registerBodySchema } from './register-schema'
 import { generateToken } from '@/utils/generate-token'
+import { makeCreateReadingSettingDefaultUseCase } from '@/use-cases/factories/make-create-reading-setting-default-use-case'
 
 export async function register(request: FastifyRequest, reply: FastifyReply) {
   const {
@@ -19,6 +20,8 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 
   try {
     const registerUseCase = makeRegisterUseCase()
+    const createReadingSettingDefaultUseCase =
+      makeCreateReadingSettingDefaultUseCase()
 
     const { user } = await registerUseCase.execute({
       username,
@@ -29,6 +32,7 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
       favoriteCategories,
       favoriteWriters,
     })
+    await createReadingSettingDefaultUseCase.execute({ userId: user.id })
 
     const token = await generateToken(
       reply,
