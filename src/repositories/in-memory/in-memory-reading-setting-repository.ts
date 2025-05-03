@@ -10,7 +10,7 @@ export class InMemoryReadingSettingRepository
 {
   public items: ReadingSetting[] = []
 
-  async findByUserId(userId: string): Promise<ReadingSetting | null> {
+  async findByUserId(userId: string) {
     const user = this.items.find(item => item.userId === userId)
 
     if (!user) {
@@ -20,13 +20,13 @@ export class InMemoryReadingSettingRepository
     return user
   }
 
-  async create(data: ReadingSettingCreateInput): Promise<ReadingSetting> {
+  async create(data: ReadingSettingCreateInput) {
     const readingSettingDefault = {
       id: randomUUID(),
       fontFamily: data.fontFamily,
-      fontSize: Prisma.Decimal(data.fontSize.toString()),
+      fontSize: new Prisma.Decimal(data.fontSize.toString()),
       fontSpacing: data.fontSpacing,
-      screenBrightness: Prisma.Decimal(data.screenBrightness.toString()),
+      screenBrightness: new Prisma.Decimal(data.screenBrightness.toString()),
       theme: data.theme,
       userId: data.user,
     }
@@ -36,7 +36,15 @@ export class InMemoryReadingSettingRepository
     return readingSettingDefault
   }
 
-  async save(data: ReadingSetting): Promise<ReadingSetting> {
-    throw new Error('Method not implemented.')
+  async save(data: ReadingSetting) {
+    const readingSettingIndex = this.items.findIndex(
+      item => item.userId === data.userId
+    )
+
+    if (readingSettingIndex >= 0) {
+      this.items[readingSettingIndex] = data
+    }
+
+    return data
   }
 }

@@ -1,6 +1,5 @@
 import { expect, describe, it, beforeEach } from 'vitest'
 import { InMemoryUsersRepository } from '@/repositories/in-memory/in-memory-users-repository'
-import { UserAlreadyExistsError } from './errors/user-already-exists-error'
 import { InMemoryReadingSettingRepository } from '@/repositories/in-memory/in-memory-reading-setting-repository'
 import { CreateReadingSettingDefaultUseCase } from './create-reading-setting-default'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'

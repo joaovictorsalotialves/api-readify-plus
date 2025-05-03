@@ -11,7 +11,7 @@
 - [x] Deve ser possível obter o perfil do usuário logado;
 - [x] Deve ser possível atualizar as informações do usuário logado;
 - [x] Deve ser possível alterar a senha do usuário logado;
-- [ ] Deve ser possível atualizar o modo de leitura do usuário logado;
+- [x] Deve ser possível atualizar o modo de leitura do usuário logado;
 - [ ] Deve ser possível obter os livros que estão sendo lidos pelo usuário logado;
 - [ ] Deve ser possível obter os livros lidos pelo usuário logado;
 - [ ] Deve ser possível obter a quantidade de livros lidos pelo usuário logado;
