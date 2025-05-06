@@ -1,15 +1,8 @@
 import type { UsersRepository } from '@/repositories/users-repository'
 import type { ReadingSettingRepository } from '@/repositories/reading-setting-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
-import { Prisma } from '@prisma/client'
 
-interface EditReadingSettingUseCaseRequest {
-  id: string
-  fontFamily: string
-  fontSize: number
-  fontSpacing: string
-  screenBrightness: number
-  theme: string
+interface GetReadingSettingUseCaseRequest {
   userId: string
 }
 
@@ -23,47 +16,31 @@ interface ReadingSettingFormatted {
   userId: string
 }
 
-interface EditReadingSettingUseCaseResponse {
+interface GetReadingSettingUseCaseResponse {
   readingSetting: ReadingSettingFormatted
 }
 
-export class EditReadingSettingUseCase {
+export class GetReadingSettingUseCase {
   constructor(
     private usersRepository: UsersRepository,
     private readingSettingRepository: ReadingSettingRepository
   ) {}
 
   async execute({
-    id,
-    fontFamily,
-    fontSize,
-    fontSpacing,
-    screenBrightness,
-    theme,
     userId,
-  }: EditReadingSettingUseCaseRequest): Promise<EditReadingSettingUseCaseResponse> {
+  }: GetReadingSettingUseCaseRequest): Promise<GetReadingSettingUseCaseResponse> {
     const user = await this.usersRepository.findById(userId)
-    const readingSettingResponse =
+    const readingSetting =
       await this.readingSettingRepository.findByUserId(userId)
 
-    if (!user || !readingSettingResponse) {
+    if (!user || !readingSetting) {
       throw new ResourceNotFoundError()
     }
-
-    const readingSetting = await this.readingSettingRepository.save({
-      id,
-      fontFamily,
-      fontSize: new Prisma.Decimal(fontSize),
-      fontSpacing,
-      screenBrightness: new Prisma.Decimal(screenBrightness),
-      theme,
-      userId,
-    })
 
     return {
       readingSetting: {
         ...readingSetting,
-        fontSize: readingSetting.fontSize.toNumber(),
+        fontSize: Number(readingSetting.fontSize),
         screenBrightness: Number(readingSetting.screenBrightness),
       },
     }
