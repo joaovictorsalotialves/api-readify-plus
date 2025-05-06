@@ -2,12 +2,11 @@ import { editReadingSettingBodySchema } from '@/http/controllers/users/edit-read
 import { verifyJWT } from '@/http/middlewares/verify-jwt'
 import { z } from 'zod'
 
-export const editReadingSettingDoc = {
+export const getReadingSettingDoc = {
   onRequest: [verifyJWT],
   schema: {
-    summary: 'Edit reading setting',
+    summary: 'Get reading setting',
     tags: ['reading setting'],
-    body: editReadingSettingBodySchema,
     response: {
       204: z.object({
         readingSetting: z.object({
