@@ -8,6 +8,8 @@ import {
 } from 'fastify-type-provider-zod'
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUi from '@fastify/swagger-ui'
+import fastifyCors from '@fastify/cors'
+
 import { env } from './env'
 
 import { usersRoutes } from './http/routers/users/userRouters'
@@ -37,6 +39,10 @@ app.register(fastifyJwt, {
   sign: {
     expiresIn: '10m',
   },
+})
+
+app.register(fastifyCors, {
+  origin: true,
 })
 
 app.register(authRoutes)
