@@ -19,7 +19,7 @@ export class InMemoryBooksRepository implements BooksRepository {
   }
 
   async searchMany(
-    query: { title: string; category: string; writer: string },
+    query: { title: string; categoryId: string; writerId: string },
     page: number
   ) {
     const filtered = this.books.filter(

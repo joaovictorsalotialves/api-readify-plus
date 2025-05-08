@@ -79,7 +79,7 @@ model Book {
   bookPath   String @map("book_path")
   synopsis   String
   publisher  String
-  numberPage String @map("number_page")
+  numberPage Int?   @map("number_page")
   language   String
   ISBN       String
 

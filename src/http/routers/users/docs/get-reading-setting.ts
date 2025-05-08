@@ -19,6 +19,7 @@ export const getReadingSettingDoc = {
           userId: z.string(),
         }),
       }),
+      401: z.object({ message: z.string() }),
       404: z.object({ message: z.string() }),
     },
   },

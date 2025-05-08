@@ -20,6 +20,7 @@ export const editReadingSettingDoc = {
           userId: z.string(),
         }),
       }),
+      401: z.object({ message: z.string() }),
       404: z.object({ message: z.string() }),
     },
   },

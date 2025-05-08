@@ -1,10 +1,10 @@
 import { expect, describe, it, beforeEach } from 'vitest'
 
 import { InMemoryBooksRepository } from '@/repositories/in-memory/in-memory-books-repository'
-import { SearchBookUseCase } from './search-books'
+import { SearchBooksUseCase } from './search-books'
 
 let bookRepository: InMemoryBooksRepository
-let sut: SearchBookUseCase
+let sut: SearchBooksUseCase
 
 describe('Search Book Use Case', () => {
   beforeEach(() => {
@@ -23,15 +23,15 @@ describe('Search Book Use Case', () => {
         bookCategoryId: 'category-1',
       }))
     )
-    sut = new SearchBookUseCase(bookRepository)
+    sut = new SearchBooksUseCase(bookRepository)
   })
 
   it('should return books that match the search query', async () => {
     const { books } = await sut.execute({
       query: {
         title: 'Book 2',
-        category: 'category-1',
-        writer: 'writer-1',
+        categoryId: 'category-1',
+        writerId: 'writer-1',
       },
       page: 1,
     })
@@ -44,8 +44,8 @@ describe('Search Book Use Case', () => {
     const { books } = await sut.execute({
       query: {
         title: 'Nonexistent Book',
-        category: 'nonexistent-category',
-        writer: 'nonexistent-writer',
+        categoryId: 'nonexistent-category',
+        writerId: 'nonexistent-writer',
       },
       page: 1,
     })
@@ -57,8 +57,8 @@ describe('Search Book Use Case', () => {
     const { books } = await sut.execute({
       query: {
         title: 'Book',
-        category: 'category-1',
-        writer: 'writer-1',
+        categoryId: 'category-1',
+        writerId: 'writer-1',
       },
       page: 2,
     })

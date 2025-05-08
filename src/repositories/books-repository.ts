@@ -3,7 +3,11 @@ import type { Book } from '@prisma/client'
 export interface BooksRepository {
   findById(id: string): Promise<Book | null>
   searchMany(
-    query: { title: string; category: string; writer: string },
+    query: {
+      title?: string
+      categoryId?: string
+      writerId?: string
+    },
     page: number
   ): Promise<Book[]>
 }
