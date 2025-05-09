@@ -1,10 +1,10 @@
 import { verifyJWT } from '@/http/middlewares/verify-jwt'
 import { z } from 'zod'
 
-export const searchBooksDoc = {
+export const getFavoriteBooksOfUserDoc = {
   onRequest: [verifyJWT],
   schema: {
-    summary: 'Search books',
+    summary: 'Get favorite books of user',
     tags: ['book'],
     response: {
       200: z.object({

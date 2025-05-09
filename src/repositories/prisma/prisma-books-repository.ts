@@ -33,4 +33,33 @@ export class PrismaBooksRepository implements BooksRepository {
 
     return book
   }
+
+  async findFavoriteBooksOfUser(userId: string) {
+    const favoriteBooks = await prisma.favoriteBooksOfUser.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        book: {
+          select: {
+            id: true,
+            title: true,
+            urlCover: true,
+            bookPath: true,
+            synopsis: true,
+            publisher: true,
+            numberPage: true,
+            language: true,
+            ISBN: true,
+            writerId: true,
+            bookCategoryId: true,
+          },
+        },
+      },
+    })
+
+    const books = favoriteBooks.map(favorite => favorite.book)
+
+    return books
+  }
 }

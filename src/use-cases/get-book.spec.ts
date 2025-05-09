@@ -17,7 +17,7 @@ describe('Get Book Use Case', () => {
         bookPath: '/books/clean-code.pdf',
         synopsis: 'A Handbook of Agile Software Craftsmanship.',
         publisher: 'Prentice Hall',
-        numberPage: '464',
+        numberPage: 464,
         language: 'English',
         ISBN: '9780132350884',
         writerId: 'writer-1',

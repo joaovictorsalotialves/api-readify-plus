@@ -19,9 +19,9 @@
 - [ ] Deve ser possível obter os livros favoritos do usuário logado;
 - [ ] Deve ser possível obter os livros sugeridos ao usuário logado (Sistema de recomendação com I.A.);
 - [ ] Deve ser possível obter os livros mais populares da plataforma;
-- [ ] Deve ser possível buscar livros pelo título;
-- [ ] Deve ser possível filtrar livros por gênero textual e/ou escritor;
-- [ ] Deve ser possível obter as informações de um livro;
+- [x] Deve ser possível buscar livros pelo título;
+- [x] Deve ser possível filtrar livros por gênero textual e/ou escritor;
+- [x] Deve ser possível obter as informações de um livro;
 - [ ] Deve ser possível adicionar um livro à lista de favoritos;
 - [ ] Deve ser possível obter o texto do livro para leitura;
 - [ ] Deve ser possível converter o texto do livro em áudio;
@@ -47,7 +47,7 @@
 
 - [x] A senha do usuário deve estar criptografada;
 - [x] Os dados da aplicação devem estar persistidos em um banco PostgreSQL;
-- [ ] Todas as listas de livros devem ser paginadas com 10 livros por página;
+- [x] Todas as listas de livros devem ser paginadas com 10 livros por página;
 - [ ] Todas as listas de avaliações devem ser paginadas com 5 avaliações por página;
 - [x] O usuário deve ser identificado por um JWT (JSON Web Token);
 - [x] O usuário pode obter um novo JWT por meio de um refresh token (quando já estiver logado);
