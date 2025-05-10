@@ -34,7 +34,7 @@ export class PrismaBooksRepository implements BooksRepository {
     return book
   }
 
-  async findFavoriteBooksOfUser(userId: string) {
+  async findManyFavoriteBooksOfUser(userId: string) {
     const favoriteBooks = await prisma.favoriteBooksOfUser.findMany({
       where: {
         userId,
@@ -59,6 +59,40 @@ export class PrismaBooksRepository implements BooksRepository {
     })
 
     const books = favoriteBooks.map(favorite => favorite.book)
+
+    return books
+  }
+
+  async findManyIsReadingBooksOfUser(userId: string) {
+    const readings = await prisma.reading.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        book: {
+          select: {
+            id: true,
+            title: true,
+            urlCover: true,
+            bookPath: true,
+            synopsis: true,
+            publisher: true,
+            numberPage: true,
+            language: true,
+            ISBN: true,
+            writerId: true,
+            bookCategoryId: true,
+          },
+        },
+      },
+    })
+
+    const books = readings
+      .filter(reading => {
+        const totalPages = reading.book.numberPage ?? 0
+        return reading.lastPageRead < totalPages
+      })
+      .map(reading => reading.book)
 
     return books
   }

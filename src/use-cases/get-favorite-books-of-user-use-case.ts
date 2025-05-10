@@ -1,7 +1,6 @@
 import type { Book } from '@prisma/client'
 
 import type { BooksRepository } from '@/repositories/books-repository'
-import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface GetFavoriteBooksOfUserUseCaseRequest {
   userId: string
@@ -17,7 +16,7 @@ export class GetFavoriteBooksOfUserUseCase {
   async execute({
     userId,
   }: GetFavoriteBooksOfUserUseCaseRequest): Promise<GetFavoriteBooksOfUserUseCaseResponse> {
-    const books = await this.booksRepository.findFavoriteBooksOfUser(userId)
+    const books = await this.booksRepository.findManyFavoriteBooksOfUser(userId)
 
     return { books }
   }

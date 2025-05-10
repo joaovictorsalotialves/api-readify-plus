@@ -21,6 +21,7 @@ model User {
   favoriteBooks      FavoriteBooksOfUser[]
 
   readingSetting ReadingSetting?
+  Reading        Reading[]
 
   @@map("users")
 }
@@ -89,6 +90,7 @@ model Book {
   category         BookCategory          @relation(fields: [bookCategoryId], references: [id])
   bookCategoryId   String                @map("book_category_id")
   favoritedByUsers FavoriteBooksOfUser[]
+  Reading          Reading[]
 
   @@map("books")
 }
@@ -111,4 +113,19 @@ model Writer {
   favoritedByUsers FavoriteWritersOfUser[]
 
   @@map("writers")
+}
+
+model Reading {
+  id           String   @id @default(uuid())
+  startTime    DateTime @map("start_time")
+  endTime      DateTime @map("end_time")
+  duration     Int
+  lastPageRead Int      @map("last_page_read")
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+  book   Book   @relation(fields: [bookId], references: [id])
+  bookId String @map("book_id")
+
+  @@map("readings")
 }

@@ -5,16 +5,25 @@ interface FavoriteBooksOfUser {
   bookId: string
   userId: string
 }
+
+interface ReadingOfUser {
+  bookId: string
+  userId: string
+  lastPageRead: number
+}
 export class InMemoryBooksRepository implements BooksRepository {
   private books: Book[] = []
   private favoriteBooksOfUsers: FavoriteBooksOfUser[] = []
+  private readingsOfUsers: ReadingOfUser[] = []
 
   constructor(
     initialBooks: Book[] = [],
-    initialFavorites: FavoriteBooksOfUser[] = []
+    initialFavorites: FavoriteBooksOfUser[] = [],
+    initialReadings: ReadingOfUser[] = []
   ) {
     this.books = initialBooks
     this.favoriteBooksOfUsers = initialFavorites
+    this.readingsOfUsers = initialReadings
   }
 
   async findById(id: string): Promise<Book | null> {
@@ -41,12 +50,26 @@ export class InMemoryBooksRepository implements BooksRepository {
     return paginated.length > 0 ? paginated : []
   }
 
-  async findFavoriteBooksOfUser(userId: string) {
+  async findManyFavoriteBooksOfUser(userId: string) {
     const favoriteBookIds = this.favoriteBooksOfUsers
       .filter(favorite => favorite.userId === userId)
       .map(favorite => favorite.bookId)
 
     const books = this.books.filter(book => favoriteBookIds.includes(book.id))
+
+    return books
+  }
+
+  async findManyIsReadingBooksOfUser(userId: string): Promise<Book[]> {
+    const readingBookIds = this.readingsOfUsers
+      .filter(reading => reading.userId === userId)
+      .filter(reading => {
+        const book = this.books.find(b => b.id === reading.bookId)
+        return book && reading.lastPageRead < (book.numberPage ?? 0)
+      })
+      .map(reading => reading.bookId)
+
+    const books = this.books.filter(book => readingBookIds.includes(book.id))
 
     return books
   }
