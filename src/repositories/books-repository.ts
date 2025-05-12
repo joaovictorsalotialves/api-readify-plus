@@ -12,4 +12,6 @@ export interface BooksRepository {
   ): Promise<Book[]>
   findManyFavoriteBooksOfUser(userId: string): Promise<Book[]>
   findManyIsReadingBooksOfUser(userId: string): Promise<Book[]>
+  findManyReadBooksOfUser(userId: string): Promise<Book[]>
+  countReadBooksOfUser(userId: string): Promise<number>
 }

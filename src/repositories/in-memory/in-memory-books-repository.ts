@@ -64,7 +64,7 @@ export class InMemoryBooksRepository implements BooksRepository {
     const readingBookIds = this.readingsOfUsers
       .filter(reading => reading.userId === userId)
       .filter(reading => {
-        const book = this.books.find(b => b.id === reading.bookId)
+        const book = this.books.find(book => book.id === reading.bookId)
         return book && reading.lastPageRead < (book.numberPage ?? 0)
       })
       .map(reading => reading.bookId)
@@ -72,5 +72,25 @@ export class InMemoryBooksRepository implements BooksRepository {
     const books = this.books.filter(book => readingBookIds.includes(book.id))
 
     return books
+  }
+
+  async findManyReadBooksOfUser(userId: string): Promise<Book[]> {
+    const readingBookIds = this.readingsOfUsers
+      .filter(reading => reading.userId === userId)
+      .filter(reading => {
+        const book = this.books.find(book => book.id === reading.bookId)
+        return book && reading.lastPageRead === (book.numberPage ?? 0)
+      })
+      .map(reading => reading.bookId)
+
+    const books = this.books.filter(book => readingBookIds.includes(book.id))
+
+    return books
+  }
+
+  async countReadBooksOfUser(userId: string) {
+    const booksRead = await this.findManyReadBooksOfUser(userId)
+
+    return booksRead.length
   }
 }

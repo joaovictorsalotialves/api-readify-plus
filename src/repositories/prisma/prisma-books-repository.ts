@@ -96,4 +96,44 @@ export class PrismaBooksRepository implements BooksRepository {
 
     return books
   }
+
+  async findManyReadBooksOfUser(userId: string) {
+    const readings = await prisma.reading.findMany({
+      where: {
+        userId,
+      },
+      include: {
+        book: {
+          select: {
+            id: true,
+            title: true,
+            urlCover: true,
+            bookPath: true,
+            synopsis: true,
+            publisher: true,
+            numberPage: true,
+            language: true,
+            ISBN: true,
+            writerId: true,
+            bookCategoryId: true,
+          },
+        },
+      },
+    })
+
+    const books = readings
+      .filter(reading => {
+        const totalPages = reading.book.numberPage ?? 0
+        return reading.lastPageRead === totalPages
+      })
+      .map(reading => reading.book)
+
+    return books
+  }
+
+  async countReadBooksOfUser(userId: string) {
+    const booksRead = await this.findManyReadBooksOfUser(userId)
+
+    return booksRead.length
+  }
 }

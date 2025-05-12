@@ -4,11 +4,15 @@ import { searchBook } from '@/http/controllers/books/search-books'
 import { getBook } from '@/http/controllers/books/get-book'
 import { getFavoriteBooksOfUser } from '@/http/controllers/books/get-favorite-books-of-user'
 import { getIsReadingBooksOfUser } from '@/http/controllers/books/get-is-reading-books-of-user'
+import { getReadBooksOfUser } from '@/http/controllers/books/get-read-books-of-user'
+import { countReadBooksOfUser } from '@/http/controllers/books/count-read-books-of-user'
 
 import { getBookDoc } from './docs/get-book'
 import { searchBooksDoc } from './docs/search-books'
 import { getFavoriteBooksOfUserDoc } from './docs/get-favorite-books-of-user'
 import { getIsReadingBooksOfUserDoc } from './docs/get-is-reading-books-of-user'
+import { getReadBooksOfUserDoc } from './docs/get-read-books-of-user'
+import { countReadBooksOfUserDoc } from './docs/count-read-books-of-user'
 
 export async function booksRoutes(app: FastifyInstance) {
   app.get('/books', searchBooksDoc, searchBook)
@@ -19,4 +23,6 @@ export async function booksRoutes(app: FastifyInstance) {
     getIsReadingBooksOfUserDoc,
     getIsReadingBooksOfUser
   )
+  app.get('/read-books', getReadBooksOfUserDoc, getReadBooksOfUser)
+  app.get('/read-books/count', countReadBooksOfUserDoc, countReadBooksOfUser)
 }

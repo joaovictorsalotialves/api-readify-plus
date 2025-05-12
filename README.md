@@ -13,9 +13,9 @@
 - [x] Deve ser possível alterar a senha do usuário logado;
 - [x] Deve ser possível obter o modo de leitura do usuário logado;
 - [x] Deve ser possível atualizar o modo de leitura do usuário logado;
-- [ ] Deve ser possível obter os livros que estão sendo lidos pelo usuário logado;
-- [ ] Deve ser possível obter os livros lidos pelo usuário logado;
-- [ ] Deve ser possível obter a quantidade de livros lidos pelo usuário logado;
+- [x] Deve ser possível obter os livros que estão sendo lidos pelo usuário logado;
+- [x] Deve ser possível obter os livros lidos pelo usuário logado;
+- [x] Deve ser possível obter a quantidade de livros lidos pelo usuário logado;
 - [x] Deve ser possível obter os livros favoritos do usuário logado;
 - [ ] Deve ser possível obter os livros sugeridos ao usuário logado (Sistema de recomendação com I.A.);
 - [ ] Deve ser possível obter os livros mais populares da plataforma;
@@ -47,7 +47,7 @@
 
 - [x] A senha do usuário deve estar criptografada;
 - [x] Os dados da aplicação devem estar persistidos em um banco PostgreSQL;
-- [x] Todas as listas de livros devem ser paginadas com 10 livros por página;
+- [ ] Listas de sugestão de livros e mais populares devem ser paginadas com 10 livros por página;
 - [ ] Todas as listas de avaliações devem ser paginadas com 5 avaliações por página;
 - [x] O usuário deve ser identificado por um JWT (JSON Web Token);
 - [x] O usuário pode obter um novo JWT por meio de um refresh token (quando já estiver logado);
