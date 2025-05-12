@@ -9,7 +9,7 @@ export const editReadingSettingDoc = {
     tags: ['reading setting'],
     body: editReadingSettingBodySchema,
     response: {
-      204: z.object({
+      200: z.object({
         readingSetting: z.object({
           id: z.string(),
           fontFamily: z.string(),

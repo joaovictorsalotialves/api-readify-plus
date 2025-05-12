@@ -22,7 +22,8 @@
 - [x] Deve ser possível buscar livros pelo título;
 - [x] Deve ser possível filtrar livros por gênero textual e/ou escritor;
 - [x] Deve ser possível obter as informações de um livro;
-- [ ] Deve ser possível adicionar um livro à lista de favoritos;
+- [x] Deve ser possível adicionar um livro à lista de favoritos;
+- [x] Deve ser possível remover um livro da lista de favoritos;
 - [ ] Deve ser possível obter o texto do livro para leitura;
 - [ ] Deve ser possível converter o texto do livro em áudio;
 - [ ] Deve ser possível gerar uma avaliação após a leitura do livro;

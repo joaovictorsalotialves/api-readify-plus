@@ -13,22 +13,17 @@ export class PrismaBooksRepository implements BooksRepository {
     return book
   }
 
-  async searchMany(
-    query: {
-      title?: string
-      categoryId?: string
-      writerId?: string
-    },
-    page: number
-  ) {
+  async searchMany(query: {
+    title?: string
+    categoryId?: string
+    writerId?: string
+  }) {
     const book = await prisma.book.findMany({
       where: {
         ...(query.title ? { title: { contains: query.title } } : {}),
         ...(query.categoryId ? { bookCategoryId: query.categoryId } : {}),
         ...(query.writerId ? { writerId: query.writerId } : {}),
       },
-      take: 10,
-      skip: (page - 1) * 10,
     })
 
     return book
@@ -135,5 +130,31 @@ export class PrismaBooksRepository implements BooksRepository {
     const booksRead = await this.findManyReadBooksOfUser(userId)
 
     return booksRead.length
+  }
+
+  async addFavoriteBook(bookId: string, userId: string) {
+    const favoriteBooksOfUsers = await this.findManyFavoriteBooksOfUser(userId)
+
+    const alreadyFavorited = favoriteBooksOfUsers.some(
+      book => book.id === bookId
+    )
+
+    if (!alreadyFavorited) {
+      await prisma.favoriteBooksOfUser.create({
+        data: {
+          userId,
+          bookId,
+        },
+      })
+    }
+  }
+
+  async removeFavoriteBook(bookId: string, userId: string) {
+    await prisma.favoriteBooksOfUser.deleteMany({
+      where: {
+        userId,
+        bookId,
+      },
+    })
   }
 }

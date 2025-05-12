@@ -36,18 +36,18 @@ export class InMemoryBooksRepository implements BooksRepository {
     return book
   }
 
-  async searchMany(
-    query: { title: string; categoryId: string; writerId: string },
-    page: number
-  ) {
+  async searchMany(query: {
+    title: string
+    categoryId: string
+    writerId: string
+  }) {
     const filtered = this.books.filter(
       book =>
         book.title.toLowerCase().includes(query.title.toLowerCase()) &&
         book.bookCategoryId &&
         book.writerId
     )
-    const paginated = filtered.slice((page - 1) * 10, page * 10)
-    return paginated.length > 0 ? paginated : []
+    return filtered.length > 0 ? filtered : []
   }
 
   async findManyFavoriteBooksOfUser(userId: string) {
@@ -92,5 +92,21 @@ export class InMemoryBooksRepository implements BooksRepository {
     const booksRead = await this.findManyReadBooksOfUser(userId)
 
     return booksRead.length
+  }
+
+  async addFavoriteBook(bookId: string, userId: string) {
+    const alreadyFavorited = this.favoriteBooksOfUsers.some(
+      favorite => favorite.userId === userId && favorite.bookId === bookId
+    )
+
+    if (!alreadyFavorited) {
+      this.favoriteBooksOfUsers.push({ bookId, userId })
+    }
+  }
+
+  async removeFavoriteBook(bookId: string, userId: string) {
+    this.favoriteBooksOfUsers = this.favoriteBooksOfUsers.filter(
+      favorite => !(favorite.userId === userId && favorite.bookId === bookId)
+    )
   }
 }

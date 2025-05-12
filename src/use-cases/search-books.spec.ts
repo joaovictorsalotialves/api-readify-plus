@@ -16,7 +16,7 @@ describe('Search Book Use Case', () => {
         bookPath: `/books/book-${index + 1}.pdf`,
         synopsis: `Synopsis for Book ${index + 1}`,
         publisher: 'Sample Publisher',
-        numberPage: '300',
+        numberPage: 300,
         language: 'English',
         ISBN: `9780132350${index + 1}`,
         writerId: 'writer-1',
@@ -33,7 +33,6 @@ describe('Search Book Use Case', () => {
         categoryId: 'category-1',
         writerId: 'writer-1',
       },
-      page: 1,
     })
 
     expect(books).toHaveLength(1)
@@ -47,23 +46,8 @@ describe('Search Book Use Case', () => {
         categoryId: 'nonexistent-category',
         writerId: 'nonexistent-writer',
       },
-      page: 1,
     })
 
     expect(books).toHaveLength(0)
-  })
-
-  it('should paginate the results correctly', async () => {
-    const { books } = await sut.execute({
-      query: {
-        title: 'Book',
-        categoryId: 'category-1',
-        writerId: 'writer-1',
-      },
-      page: 2,
-    })
-
-    expect(books).toHaveLength(5)
-    expect(books[0].title).toBe('Book 11')
   })
 })

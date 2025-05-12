@@ -8,7 +8,6 @@ interface SearchBooksUseCaseRequest {
     categoryId?: string
     writerId?: string
   }
-  page: number
 }
 
 interface SearchBooksUseCaseResponse {
@@ -20,9 +19,8 @@ export class SearchBooksUseCase {
 
   async execute({
     query,
-    page,
   }: SearchBooksUseCaseRequest): Promise<SearchBooksUseCaseResponse> {
-    const books = await this.booksRepository.searchMany(query, page)
+    const books = await this.booksRepository.searchMany(query)
 
     return { books }
   }

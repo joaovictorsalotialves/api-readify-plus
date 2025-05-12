@@ -4,7 +4,7 @@ import { searchBooksQuerySchema } from './search-books-schema'
 import { makeSearchBooksUseCase } from '@/use-cases/factories/make-search-books-use-case'
 
 export async function searchBook(request: FastifyRequest, reply: FastifyReply) {
-  const { title, categoryId, writerId, page } = searchBooksQuerySchema.parse(
+  const { title, categoryId, writerId } = searchBooksQuerySchema.parse(
     request.query
   )
 
@@ -13,7 +13,6 @@ export async function searchBook(request: FastifyRequest, reply: FastifyReply) {
 
     const { books } = await searchBookUseCase.execute({
       query: { title, categoryId, writerId },
-      page,
     })
 
     return reply.status(200).send({ books })
