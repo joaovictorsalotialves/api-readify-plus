@@ -19,6 +19,7 @@ describe('Search Book Use Case', () => {
         numberPage: 300,
         language: 'English',
         ISBN: `9780132350${index + 1}`,
+        visits: 0,
         writerId: 'writer-1',
         bookCategoryId: 'category-1',
       }))

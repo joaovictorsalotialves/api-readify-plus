@@ -7,6 +7,7 @@ export interface BooksRepository {
     categoryId?: string
     writerId?: string
   }): Promise<Book[]>
+  findManyMostPopularBooks(): Promise<Book[]>
   findManyFavoriteBooksOfUser(userId: string): Promise<Book[]>
   findManyIsReadingBooksOfUser(userId: string): Promise<Book[]>
   findManyReadBooksOfUser(userId: string): Promise<Book[]>

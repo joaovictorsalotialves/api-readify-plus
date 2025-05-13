@@ -30,8 +30,6 @@ export class GetBookUseCase {
       userId
     )
 
-    console.log(bookResponse)
-
     return { book: { ...bookResponse } }
   }
 }

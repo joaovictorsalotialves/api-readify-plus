@@ -20,6 +20,7 @@ describe('Remove Favorite Book Use Case', () => {
           numberPage: 300,
           language: 'English',
           ISBN: '9780132350884',
+          visits: 0,
           writerId: 'writer-1',
           bookCategoryId: 'category-1',
         },

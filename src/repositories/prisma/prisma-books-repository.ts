@@ -182,4 +182,15 @@ export class PrismaBooksRepository implements BooksRepository {
 
     return bookResponse
   }
+
+  async findManyMostPopularBooks() {
+    const book = await prisma.book.findMany({
+      orderBy: {
+        visits: 'desc',
+      },
+      take: 10,
+    })
+
+    return book
+  }
 }

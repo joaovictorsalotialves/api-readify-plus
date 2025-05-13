@@ -17,10 +17,13 @@ import { getReadBooksOfUserDoc } from './docs/get-read-books-of-user'
 import { countReadBooksOfUserDoc } from './docs/count-read-books-of-user'
 import { addFavoriteBookDoc } from './docs/add-favorite-book'
 import { removeFavoriteBookDoc } from './docs/remove-favorite-book'
+import { getMostPopularBooksDoc } from './docs/get-most-popular-books'
+import { getMostPopularBooks } from '@/http/controllers/books/get-most-popular-books'
 
 export async function booksRoutes(app: FastifyInstance) {
   app.get('/books', searchBooksDoc, searchBook)
   app.get('/books/:bookId', getBookDoc, getBook)
+  app.get('/most-popular-books', getMostPopularBooksDoc, getMostPopularBooks)
   app.get('/favorite-books', getFavoriteBooksOfUserDoc, getFavoriteBooksOfUser)
   app.get(
     '/is-reading-books',
