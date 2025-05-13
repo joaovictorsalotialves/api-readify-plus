@@ -10,7 +10,10 @@ export async function getBook(request: FastifyRequest, reply: FastifyReply) {
   try {
     const getBookUseCase = makeGetBookUseCase()
 
-    const { book } = await getBookUseCase.execute({ bookId })
+    const { book } = await getBookUseCase.execute({
+      bookId,
+      userId: request.user.sub,
+    })
 
     return reply.status(200).send({ book })
   } catch (err) {

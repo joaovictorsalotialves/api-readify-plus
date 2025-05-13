@@ -30,7 +30,7 @@
 - [ ] Deve ser possível editar a avaliação do livro feita pelo usuário;
 - [ ] Deve ser possível excluir a avaliação do livro feita pelo usuário;
 - [ ] Deve ser possível obter a quantidade de comentarios feitos pelo usuário logado;
-- [ ] Deve ser possível obter a quantidade de visitas na página de um livro;
+- [x] Deve ser possível controlar visitas na página de um livro;
 - [ ] Deve ser possível controlar o progresso da leitura do livro;
 
 ## RNs (Regras de Negócio)

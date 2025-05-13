@@ -11,19 +11,28 @@ interface ReadingOfUser {
   userId: string
   lastPageRead: number
 }
+
+interface UserVisitBook {
+  bookId: string
+  userId: string
+}
+
 export class InMemoryBooksRepository implements BooksRepository {
   private books: Book[] = []
   private favoriteBooksOfUsers: FavoriteBooksOfUser[] = []
   private readingsOfUsers: ReadingOfUser[] = []
+  private userVisitBooks: UserVisitBook[] = []
 
   constructor(
     initialBooks: Book[] = [],
     initialFavorites: FavoriteBooksOfUser[] = [],
-    initialReadings: ReadingOfUser[] = []
+    initialReadings: ReadingOfUser[] = [],
+    initialVisits: UserVisitBook[] = []
   ) {
     this.books = initialBooks
     this.favoriteBooksOfUsers = initialFavorites
     this.readingsOfUsers = initialReadings
+    this.userVisitBooks = initialVisits
   }
 
   async findById(id: string): Promise<Book | null> {
@@ -108,5 +117,22 @@ export class InMemoryBooksRepository implements BooksRepository {
     this.favoriteBooksOfUsers = this.favoriteBooksOfUsers.filter(
       favorite => !(favorite.userId === userId && favorite.bookId === bookId)
     )
+  }
+
+  async addUserVisitBook(book: Book, userId: string) {
+    this.userVisitBooks.push({ bookId: book.id, userId })
+
+    const bookIndex = this.books.findIndex(b => b.id === book.id)
+
+    if (bookIndex !== -1) {
+      this.books[bookIndex] = {
+        ...this.books[bookIndex],
+        visits: (this.books[bookIndex].visits ?? 0) + 1,
+      }
+
+      return this.books[bookIndex]
+    }
+
+    return this.books[bookIndex]
   }
 }

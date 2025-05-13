@@ -5,6 +5,7 @@ import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface GetBookUseCaseRequest {
   bookId: string
+  userId: string
 }
 
 interface GetBookUseCaseResponse {
@@ -16,6 +17,7 @@ export class GetBookUseCase {
 
   async execute({
     bookId,
+    userId,
   }: GetBookUseCaseRequest): Promise<GetBookUseCaseResponse> {
     const book = await this.booksRepository.findById(bookId)
 
@@ -23,6 +25,13 @@ export class GetBookUseCase {
       throw new ResourceNotFoundError()
     }
 
-    return { book }
+    const bookResponse = await this.booksRepository.addUserVisitBook(
+      book,
+      userId
+    )
+
+    console.log(bookResponse)
+
+    return { book: { ...bookResponse } }
   }
 }

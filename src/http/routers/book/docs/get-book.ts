@@ -18,6 +18,7 @@ export const getBookDoc = {
           numberPage: z.coerce.number(),
           language: z.string(),
           ISBN: z.string(),
+          visits: z.coerce.number(),
           writerId: z.string().uuid(),
           bookCategoryId: z.string().uuid(),
         }),

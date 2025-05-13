@@ -20,6 +20,7 @@ describe('Get Book Use Case', () => {
         numberPage: 464,
         language: 'English',
         ISBN: '9780132350884',
+        visits: 0,
         writerId: 'writer-1',
         bookCategoryId: 'category-1',
       },
@@ -27,19 +28,23 @@ describe('Get Book Use Case', () => {
     sut = new GetBookUseCase(bookRepository)
   })
 
-  it('should be able to get book', async () => {
+  it('should be able to get book and increment visits', async () => {
     const { book } = await sut.execute({
       bookId: 'book-1',
+      userId: 'user-123',
     })
 
     expect(book.id).toEqual(expect.any(String))
     expect(book.title).toEqual('Clean Code')
+
+    expect(book.visits).toEqual(1)
   })
 
   it('should not be able to get book with wrong id', async () => {
     await expect(() =>
       sut.execute({
         bookId: 'none-existing-id',
+        userId: 'user-123',
       })
     ).rejects.toBeInstanceOf(ResourceNotFoundError)
   })

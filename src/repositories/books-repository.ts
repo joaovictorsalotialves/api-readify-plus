@@ -13,4 +13,5 @@ export interface BooksRepository {
   countReadBooksOfUser(userId: string): Promise<number>
   addFavoriteBook(bookId: string, userId: string): Promise<void>
   removeFavoriteBook(bookId: string, userId: string): Promise<void>
+  addUserVisitBook(book: Book, userId: string): Promise<Book>
 }

@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma'
 
 import type { BooksRepository } from '../books-repository'
+import type { Book } from '@prisma/client'
 
 export class PrismaBooksRepository implements BooksRepository {
   async findById(id: string) {
@@ -46,6 +47,7 @@ export class PrismaBooksRepository implements BooksRepository {
             numberPage: true,
             language: true,
             ISBN: true,
+            visits: true,
             writerId: true,
             bookCategoryId: true,
           },
@@ -75,6 +77,7 @@ export class PrismaBooksRepository implements BooksRepository {
             numberPage: true,
             language: true,
             ISBN: true,
+            visits: true,
             writerId: true,
             bookCategoryId: true,
           },
@@ -109,6 +112,7 @@ export class PrismaBooksRepository implements BooksRepository {
             numberPage: true,
             language: true,
             ISBN: true,
+            visits: true,
             writerId: true,
             bookCategoryId: true,
           },
@@ -156,5 +160,26 @@ export class PrismaBooksRepository implements BooksRepository {
         bookId,
       },
     })
+  }
+
+  async addUserVisitBook(book: Book, userId: string) {
+    await prisma.userVisitBook.create({
+      data: {
+        bookId: book.id,
+        userId,
+      },
+    })
+
+    const bookResponse = await prisma.book.update({
+      data: {
+        ...book,
+        visits: (book.visits ?? 0) + 1,
+      },
+      where: {
+        id: book.id,
+      },
+    })
+
+    return bookResponse
   }
 }
