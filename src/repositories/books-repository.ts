@@ -15,4 +15,5 @@ export interface BooksRepository {
   addFavoriteBook(bookId: string, userId: string): Promise<void>
   removeFavoriteBook(bookId: string, userId: string): Promise<void>
   addUserVisitBook(book: Book, userId: string): Promise<Book>
+  isFavoriteBookOfUser(bookId: string, userId: string): Promise<boolean>
 }

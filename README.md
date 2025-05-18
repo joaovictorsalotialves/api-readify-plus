@@ -18,7 +18,7 @@
 - [x] Deve ser possível obter a quantidade de livros lidos pelo usuário logado;
 - [x] Deve ser possível obter os livros favoritos do usuário logado;
 - [ ] Deve ser possível obter os livros sugeridos ao usuário logado (Sistema de recomendação com I.A.);
-- [ ] Deve ser possível obter os livros mais populares da plataforma;
+- [x] Deve ser possível obter os livros mais populares da plataforma;
 - [x] Deve ser possível buscar livros pelo título;
 - [x] Deve ser possível filtrar livros por gênero textual e/ou escritor;
 - [x] Deve ser possível obter as informações de um livro;
@@ -26,7 +26,9 @@
 - [x] Deve ser possível remover um livro da lista de favoritos;
 - [ ] Deve ser possível obter o texto do livro para leitura;
 - [ ] Deve ser possível converter o texto do livro em áudio;
-- [ ] Deve ser possível gerar uma avaliação após a leitura do livro;
+- [ ] Deve ser possível obter as avaliações de um livro;
+- [ ] Deve ser possível obter a avaliação de um usuário de um livro;
+- [ ] Deve ser possível gerar uma avaliação do livro;
 - [ ] Deve ser possível editar a avaliação do livro feita pelo usuário;
 - [ ] Deve ser possível excluir a avaliação do livro feita pelo usuário;
 - [ ] Deve ser possível obter a quantidade de comentarios feitos pelo usuário logado;

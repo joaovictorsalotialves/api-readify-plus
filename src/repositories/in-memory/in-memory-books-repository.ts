@@ -136,10 +136,16 @@ export class InMemoryBooksRepository implements BooksRepository {
     return this.books[bookIndex]
   }
 
-  async findManyMostPopularBooks(): Promise<Book[]> {
+  async findManyMostPopularBooks() {
     const sortedBooks = [...this.books].sort(
       (a, b) => (b.visits ?? 0) - (a.visits ?? 0)
     )
     return sortedBooks.splice(0, 10)
+  }
+
+  async isFavoriteBookOfUser(bookId: string, userId: string) {
+    return this.favoriteBooksOfUsers.some(
+      favorite => favorite.userId === userId && favorite.bookId === bookId
+    )
   }
 }

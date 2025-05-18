@@ -10,12 +10,12 @@ export async function getBook(request: FastifyRequest, reply: FastifyReply) {
   try {
     const getBookUseCase = makeGetBookUseCase()
 
-    const { book } = await getBookUseCase.execute({
+    const { book, isFavorite } = await getBookUseCase.execute({
       bookId,
       userId: request.user.sub,
     })
 
-    return reply.status(200).send({ book })
+    return reply.status(200).send({ book, isFavorite })
   } catch (err) {
     if (err instanceof ResourceNotFoundError) {
       return reply.status(404).send({

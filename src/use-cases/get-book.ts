@@ -10,6 +10,7 @@ interface GetBookUseCaseRequest {
 
 interface GetBookUseCaseResponse {
   book: Book
+  isFavorite: boolean
 }
 
 export class GetBookUseCase {
@@ -30,6 +31,11 @@ export class GetBookUseCase {
       userId
     )
 
-    return { book: { ...bookResponse } }
+    const isFavorite = await this.booksRepository.isFavoriteBookOfUser(
+      book.id,
+      userId
+    )
+
+    return { book: { ...bookResponse }, isFavorite }
   }
 }

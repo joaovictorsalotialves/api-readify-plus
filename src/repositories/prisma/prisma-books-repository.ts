@@ -193,4 +193,15 @@ export class PrismaBooksRepository implements BooksRepository {
 
     return book
   }
+
+  async isFavoriteBookOfUser(bookId: string, userId: string) {
+    const favorite = await prisma.favoriteBooksOfUser.findFirst({
+      where: {
+        bookId,
+        userId,
+      },
+    })
+
+    return !!favorite
+  }
 }

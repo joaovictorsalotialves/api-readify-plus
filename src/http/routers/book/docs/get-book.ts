@@ -22,6 +22,7 @@ export const getBookDoc = {
           writerId: z.string().uuid(),
           bookCategoryId: z.string().uuid(),
         }),
+        isFavorite: z.boolean(),
       }),
       404: z.object({ message: z.string() }),
       401: z.object({ message: z.string() }),
