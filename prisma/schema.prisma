@@ -20,9 +20,11 @@ model User {
   favoriteCategories FavoriteCategoriesBookOfUser[]
   favoriteBooks      FavoriteBooksOfUser[]
 
-  readingSetting ReadingSetting?
-  Reading        Reading[]
-  UserVisitBook  UserVisitBook[]
+  readingSetting      ReadingSetting?
+  Reading             Reading[]
+  UserVisitBook       UserVisitBook[]
+  Assessement         Assessement[]
+  UserLikeAssessement UserLikeAssessement[]
 
   @@map("users")
 }
@@ -94,6 +96,7 @@ model Book {
   favoritedByUsers FavoriteBooksOfUser[]
   Reading          Reading[]
   UserVisitBook    UserVisitBook[]
+  Assessement      Assessement[]
 
   @@map("books")
 }
@@ -142,4 +145,31 @@ model UserVisitBook {
   bookId String @map("book_id")
 
   @@map("user_visits_book")
+}
+
+model Assessement {
+  id      String @id @default(uuid())
+  score   Int
+  comment String
+  likes   Int
+
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+  book   Book   @relation(fields: [bookId], references: [id])
+  bookId String @map("book_id")
+
+  UserLikesAssessements UserLikeAssessement[]
+
+  @@map("assessement")
+}
+
+model UserLikeAssessement {
+  user   User   @relation(fields: [userId], references: [id])
+  userId String @map("user_id")
+
+  assessement   Assessement @relation(fields: [assessementId], references: [id])
+  assessementId String      @map("assessement_id")
+
+  @@id([userId, assessementId])
+  @@map("user_like_assessement")
 }

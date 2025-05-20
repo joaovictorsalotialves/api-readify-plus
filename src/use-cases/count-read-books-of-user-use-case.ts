@@ -1,5 +1,3 @@
-import type { Book } from '@prisma/client'
-
 import type { BooksRepository } from '@/repositories/books-repository'
 
 interface CountReadBooksOfUserUseCaseRequest {

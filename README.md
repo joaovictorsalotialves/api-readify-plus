@@ -27,13 +27,15 @@
 - [ ] Deve ser possível obter o texto do livro para leitura;
 - [ ] Deve ser possível converter o texto do livro em áudio;
 - [ ] Deve ser possível obter as avaliações de um livro;
-- [ ] Deve ser possível obter a avaliação de um usuário de um livro;
-- [ ] Deve ser possível gerar uma avaliação do livro;
-- [ ] Deve ser possível editar a avaliação do livro feita pelo usuário;
-- [ ] Deve ser possível excluir a avaliação do livro feita pelo usuário;
-- [ ] Deve ser possível obter a quantidade de comentarios feitos pelo usuário logado;
+- [x] Deve ser possível dar um like em uma avaliação;  //
+- [x] Deve ser possível remover o like em uma avaliação;  //
+- [x] Deve ser possível gerar uma avaliação do livro;  //
+- [ ] Deve ser possível editar uma avaliação do livro;
+- [ ] Deve ser possível excluir uma avaliação do livro;
+- [x] Deve ser possível obter a quantidade de comentarios feitos pelo usuário logado; //
 - [x] Deve ser possível controlar visitas na página de um livro;
-- [ ] Deve ser possível controlar o progresso da leitura do livro;
+- [ ] Deve ser possível controlar o progresso da leitura do livro; //
+- [ ] Deve ser possível obter o progresso da leitura do livro; //
 
 ## RNs (Regras de Negócio)
 
