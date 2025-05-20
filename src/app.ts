@@ -15,6 +15,7 @@ import { env } from './env'
 import { usersRoutes } from './http/routers/users/userRouters'
 import { authRoutes } from './http/routers/auth/authRouters'
 import { booksRoutes } from './http/routers/book/bookRouters'
+import { assessementRoutes } from './http/routers/assessements/assessementRouters'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -49,6 +50,7 @@ app.register(fastifyCors, {
 app.register(authRoutes)
 app.register(usersRoutes)
 app.register(booksRoutes)
+app.register(assessementRoutes)
 
 app.setErrorHandler((err, _, reply) => {
   if (err.validation && err.code === 'FST_ERR_VALIDATION') {
