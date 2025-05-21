@@ -1,19 +1,21 @@
-import type { Book } from '@prisma/client'
+import type { BooksDTO } from '@/dtos/Book'
 
 export interface BooksRepository {
-  findById(id: string): Promise<Book | null>
+  findById(id: string): Promise<BooksDTO | null>
   searchMany(query: {
     title?: string
     categoryId?: string
     writerId?: string
-  }): Promise<Book[]>
-  findManyMostPopularBooks(): Promise<Book[]>
-  findManyFavoriteBooksOfUser(userId: string): Promise<Book[]>
-  findManyIsReadingBooksOfUser(userId: string): Promise<Book[]>
-  findManyReadBooksOfUser(userId: string): Promise<Book[]>
+  }): Promise<BooksDTO[]>
+  findByTitle(title: string): Promise<BooksDTO | null>
+  findManyBooks(): Promise<BooksDTO[]>
+  findManyMostPopularBooks(): Promise<BooksDTO[]>
+  findManyFavoriteBooksOfUser(userId: string): Promise<BooksDTO[]>
+  findManyIsReadingBooksOfUser(userId: string): Promise<BooksDTO[]>
+  findManyReadBooksOfUser(userId: string): Promise<BooksDTO[]>
   countReadBooksOfUser(userId: string): Promise<number>
   addFavoriteBook(bookId: string, userId: string): Promise<void>
   removeFavoriteBook(bookId: string, userId: string): Promise<void>
-  addUserVisitBook(book: Book, userId: string): Promise<Book>
+  addUserVisitBook(book: BooksDTO, userId: string): Promise<BooksDTO>
   isFavoriteBookOfUser(bookId: string, userId: string): Promise<boolean>
 }

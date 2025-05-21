@@ -1,10 +1,10 @@
 import { verifyJWT } from '@/http/middlewares/verify-jwt'
 import { z } from 'zod'
 
-export const getIsReadingBooksOfUserDoc = {
+export const getBooksDoc = {
   onRequest: [verifyJWT],
   schema: {
-    summary: 'Get is reading books of user',
+    summary: 'Get books',
     tags: ['book'],
     response: {
       200: z.object({
@@ -31,6 +31,7 @@ export const getIsReadingBooksOfUserDoc = {
           })
         ),
       }),
+      404: z.object({ message: z.string() }),
       401: z.object({ message: z.string() }),
     },
   },

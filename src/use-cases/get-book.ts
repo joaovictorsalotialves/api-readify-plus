@@ -2,6 +2,7 @@ import type { Book } from '@prisma/client'
 
 import type { BooksRepository } from '@/repositories/books-repository'
 import { ResourceNotFoundError } from './errors/resource-not-found-error'
+import type { BooksDTO } from '@/dtos/Book'
 
 interface GetBookUseCaseRequest {
   bookId: string
@@ -9,7 +10,7 @@ interface GetBookUseCaseRequest {
 }
 
 interface GetBookUseCaseResponse {
-  book: Book
+  book: BooksDTO
   isFavorite: boolean
 }
 

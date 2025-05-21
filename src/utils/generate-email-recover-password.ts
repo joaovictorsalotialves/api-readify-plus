@@ -64,7 +64,7 @@ export function generateEmailRecoveryPassword(
 
                     <p style="font-size: 14px; color: #555;">
                       Atenciosamente,<br />
-                      <strong>Equipe do Sistema</strong>
+                      <strong>Readify Plus</strong>
                     </p>
                   </td>
                 </tr>

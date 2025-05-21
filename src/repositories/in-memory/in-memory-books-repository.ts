@@ -1,5 +1,6 @@
 import type { Book } from '@prisma/client'
-import type { BooksRepository } from '../books-repository' // ajuste o caminho conforme necessário
+import type { BooksRepository } from '../books-repository'
+import type { BooksDTO } from '@/dtos/Book'
 
 interface FavoriteBooksOfUser {
   bookId: string
@@ -17,32 +18,78 @@ interface UserVisitBook {
   userId: string
 }
 
+interface Writer {
+  id: string
+  name: string
+}
+
+interface BookCategory {
+  id: string
+  name: string
+}
+
 export class InMemoryBooksRepository implements BooksRepository {
   private books: Book[] = []
   private favoriteBooksOfUsers: FavoriteBooksOfUser[] = []
   private readingsOfUsers: ReadingOfUser[] = []
   private userVisitBooks: UserVisitBook[] = []
+  private writers: Writer[] = []
+  private bookCategories: BookCategory[] = []
 
   constructor(
     initialBooks: Book[] = [],
     initialFavorites: FavoriteBooksOfUser[] = [],
     initialReadings: ReadingOfUser[] = [],
-    initialVisits: UserVisitBook[] = []
+    initialVisits: UserVisitBook[] = [],
+    initialWriters: Writer[] = [],
+    initialBookCategories: BookCategory[] = []
   ) {
     this.books = initialBooks
     this.favoriteBooksOfUsers = initialFavorites
     this.readingsOfUsers = initialReadings
     this.userVisitBooks = initialVisits
+    this.writers = initialWriters
+    this.bookCategories = initialBookCategories
   }
 
-  async findById(id: string): Promise<Book | null> {
-    const book = this.books.find(book => book.id === id)
+  private mapToDTO(book: Book): BooksDTO {
+    const writer = this.writers.find(w => w.id === book.writerId)
+    const category = this.bookCategories.find(c => c.id === book.bookCategoryId)
 
-    if (!book) {
-      return null
+    return {
+      id: book.id,
+      title: book.title,
+      urlCover: book.urlCover,
+      bookPath: book.bookPath,
+      synopsis: book.synopsis,
+      publisher: book.publisher,
+      numberPage: book.numberPage,
+      language: book.language,
+      ISBN: book.ISBN,
+      visits: book.visits ?? 0,
+      writer: {
+        id: writer?.id ?? '',
+        name: writer?.name ?? '',
+      },
+      category: {
+        id: category?.id ?? '',
+        name: category?.name ?? '',
+      },
     }
+  }
 
-    return book
+  async findById(id: string) {
+    const book = this.books.find(book => book.id === id)
+    return book ? this.mapToDTO(book) : null
+  }
+
+  async findByTitle(title: string) {
+    const book = this.books.find(book => book.title === title)
+    return book ? this.mapToDTO(book) : null
+  }
+
+  async findManyBooks() {
+    return this.books.map(this.mapToDTO.bind(this))
   }
 
   async searchMany(query: {
@@ -53,10 +100,11 @@ export class InMemoryBooksRepository implements BooksRepository {
     const filtered = this.books.filter(
       book =>
         book.title.toLowerCase().includes(query.title.toLowerCase()) &&
-        book.bookCategoryId &&
-        book.writerId
+        book.bookCategoryId === query.categoryId &&
+        book.writerId === query.writerId
     )
-    return filtered.length > 0 ? filtered : []
+
+    return filtered.map(this.mapToDTO.bind(this))
   }
 
   async findManyFavoriteBooksOfUser(userId: string) {
@@ -66,10 +114,10 @@ export class InMemoryBooksRepository implements BooksRepository {
 
     const books = this.books.filter(book => favoriteBookIds.includes(book.id))
 
-    return books
+    return books.map(this.mapToDTO.bind(this))
   }
 
-  async findManyIsReadingBooksOfUser(userId: string): Promise<Book[]> {
+  async findManyIsReadingBooksOfUser(userId: string) {
     const readingBookIds = this.readingsOfUsers
       .filter(reading => reading.userId === userId)
       .filter(reading => {
@@ -80,10 +128,10 @@ export class InMemoryBooksRepository implements BooksRepository {
 
     const books = this.books.filter(book => readingBookIds.includes(book.id))
 
-    return books
+    return books.map(this.mapToDTO.bind(this))
   }
 
-  async findManyReadBooksOfUser(userId: string): Promise<Book[]> {
+  async findManyReadBooksOfUser(userId: string) {
     const readingBookIds = this.readingsOfUsers
       .filter(reading => reading.userId === userId)
       .filter(reading => {
@@ -94,12 +142,11 @@ export class InMemoryBooksRepository implements BooksRepository {
 
     const books = this.books.filter(book => readingBookIds.includes(book.id))
 
-    return books
+    return books.map(this.mapToDTO.bind(this))
   }
 
   async countReadBooksOfUser(userId: string) {
     const booksRead = await this.findManyReadBooksOfUser(userId)
-
     return booksRead.length
   }
 
@@ -119,7 +166,7 @@ export class InMemoryBooksRepository implements BooksRepository {
     )
   }
 
-  async addUserVisitBook(book: Book, userId: string) {
+  async addUserVisitBook(book: BooksDTO, userId: string): Promise<BooksDTO> {
     this.userVisitBooks.push({ bookId: book.id, userId })
 
     const bookIndex = this.books.findIndex(b => b.id === book.id)
@@ -130,17 +177,21 @@ export class InMemoryBooksRepository implements BooksRepository {
         visits: (this.books[bookIndex].visits ?? 0) + 1,
       }
 
-      return this.books[bookIndex]
+      return this.mapToDTO(this.books[bookIndex])
     }
 
-    return this.books[bookIndex]
+    // Fallback: retorna o DTO original, mas incrementado localmente o visits
+    return {
+      ...book,
+      visits: book.visits + 1,
+    }
   }
 
   async findManyMostPopularBooks() {
     const sortedBooks = [...this.books].sort(
       (a, b) => (b.visits ?? 0) - (a.visits ?? 0)
     )
-    return sortedBooks.splice(0, 10)
+    return sortedBooks.slice(0, 10).map(this.mapToDTO.bind(this))
   }
 
   async isFavoriteBookOfUser(bookId: string, userId: string) {

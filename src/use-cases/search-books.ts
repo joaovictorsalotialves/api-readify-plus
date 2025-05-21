@@ -1,6 +1,5 @@
-import type { Book } from '@prisma/client'
-
 import type { BooksRepository } from '@/repositories/books-repository'
+import type { BooksDTO } from '@/dtos/Book'
 
 interface SearchBooksUseCaseRequest {
   query: {
@@ -11,7 +10,7 @@ interface SearchBooksUseCaseRequest {
 }
 
 interface SearchBooksUseCaseResponse {
-  books: Book[]
+  books: BooksDTO[]
 }
 
 export class SearchBooksUseCase {

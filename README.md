@@ -43,7 +43,6 @@
 - [x] O usuário não pode se cadastrar com um e-mail já existente;
 - [x] O usuário deve cadastrar pelo menos 2 preferencias de leitura para categoria e escritor; 
 - [x] O usuário quando cadastrar deve ser criado a configuração de leitura padrão e vincular ao usuário;
-- [ ] O usuário só pode gerar uma avaliação após finalizar a leitura do livro;
 - [ ] O usuário só pode editar ou excluir avaliações feitas por ele mesmo;
 - [x] O usuário deve permanecer logado por meio do sistema de autenticação com refresh token;
 - [ ] As recomendações de livros devem levar em consideração os gêneros, escritores e o progresso e engajamento do usuário na leitura;
@@ -53,11 +52,11 @@
 
 - [x] A senha do usuário deve estar criptografada;
 - [x] Os dados da aplicação devem estar persistidos em um banco PostgreSQL;
-- [ ] Listas de sugestão de livros e mais populares devem ser paginadas com 10 livros por página;
+- [ ] Listas de sugestão de livros devem ser paginadas com 10 livros por página;
 - [ ] Todas as listas de avaliações devem ser paginadas com 5 avaliações por página;
 - [x] O usuário deve ser identificado por um JWT (JSON Web Token);
 - [x] O usuário pode obter um novo JWT por meio de um refresh token (quando já estiver logado);
 - [ ] Os livros devem ser armazenados em arquivos PDF;
 - [x] Para recuperação de senha, o usuário deve receber um e-mail com um código de 6 dígitos;
 - [ ] As respostas das recomendações baseadas em IA devem ser entregues em até 2 segundos para manter a fluidez da experiência;
-- [ ] O processamento de dados sensíveis para recomendações deve seguir políticas de privacidade e anonimização;
+- [ ] O processamento de dados sensíveis para recomendações deve seguir políticas de privacidade;

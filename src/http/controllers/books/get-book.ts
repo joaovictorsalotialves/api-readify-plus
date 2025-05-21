@@ -7,6 +7,8 @@ import { getBookParamSchema } from './get-book-schema'
 export async function getBook(request: FastifyRequest, reply: FastifyReply) {
   const { bookId } = getBookParamSchema.parse(request.params)
 
+  console.log(bookId)
+
   try {
     const getBookUseCase = makeGetBookUseCase()
 

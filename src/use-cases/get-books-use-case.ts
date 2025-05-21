@@ -1,15 +1,15 @@
 import type { BooksRepository } from '@/repositories/books-repository'
 import type { BooksDTO } from '@/dtos/Book'
 
-interface GetMostPopularBooksUseCaseResponse {
+interface GetBookUseCaseResponse {
   books: BooksDTO[]
 }
 
-export class GetMostPopularBooksUseCase {
+export class GetBooksUseCase {
   constructor(private booksRepository: BooksRepository) {}
 
-  async execute(): Promise<GetMostPopularBooksUseCaseResponse> {
-    const books = await this.booksRepository.findManyMostPopularBooks()
+  async execute(): Promise<GetBookUseCaseResponse> {
+    const books = await this.booksRepository.findManyBooks()
 
     return { books }
   }

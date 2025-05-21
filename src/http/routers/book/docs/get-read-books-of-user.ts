@@ -20,8 +20,14 @@ export const getReadBooksOfUserDoc = {
             language: z.string(),
             ISBN: z.string(),
             visits: z.coerce.number(),
-            writerId: z.string().uuid(),
-            bookCategoryId: z.string().uuid(),
+            writer: z.object({
+              id: z.string().uuid(),
+              name: z.string(),
+            }),
+            category: z.object({
+              id: z.string().uuid(),
+              name: z.string(),
+            }),
           })
         ),
       }),
