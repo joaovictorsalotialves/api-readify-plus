@@ -16,7 +16,7 @@ export async function generateToken(
 ): Promise<string> {
   const token = await reply.jwtSign(
     { passwordRecoveryCode: passwordRecoveryCode ?? undefined },
-    { sign: { sub, expiresIn: expiresIn ?? '10m' } }
+    { sign: { sub, expiresIn: expiresIn ?? '1h' } }
   )
 
   return token

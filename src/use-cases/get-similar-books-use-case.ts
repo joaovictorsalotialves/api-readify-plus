@@ -1,8 +1,7 @@
-// src/use-cases/get-similar-books.ts
-
 import type { SimilarBooksProvider } from '@/providers/IAProvider'
 import type { BooksRepository } from '../repositories/books-repository'
 import type { BooksDTO } from '@/dtos/Book'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 interface GetSimilarBooksUseCaseRequest {
   bookId: string
@@ -23,13 +22,13 @@ export class GetSimilarBooksUseCase {
   }: GetSimilarBooksUseCaseRequest): Promise<GetSimilarBooksUseCaseResponse> {
     const referenceBook = await this.booksRepository.findById(bookId)
     if (!referenceBook) {
-      throw new Error('Book not found.')
+      throw new ResourceNotFoundError()
     }
 
     const allBooks = await this.booksRepository.findManyBooks()
 
     const availableBooks = allBooks
-      .filter(book => book.id !== referenceBook.id) // evita sugerir o próprio livro
+      .filter(book => book.id !== referenceBook.id)
       .map(book => ({
         title: book.title,
         writer: book.writer.name,

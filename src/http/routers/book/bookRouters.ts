@@ -9,6 +9,8 @@ import { countReadBooksOfUser } from '@/http/controllers/books/count-read-books-
 import { addFavoriteBook } from '@/http/controllers/books/add-favorite-book'
 import { removeFavoriteBook } from '@/http/controllers/books/remove-favorite-book'
 import { getBooks } from '@/http/controllers/books/get-books'
+import { getRecommendBooks } from '@/http/controllers/books/get-recommend-books'
+import { getSimilarBooks } from '@/http/controllers/books/get-similar-books'
 
 import { getBookDoc } from './docs/get-book'
 import { searchBooksDoc } from './docs/search-books'
@@ -21,6 +23,8 @@ import { removeFavoriteBookDoc } from './docs/remove-favorite-book'
 import { getMostPopularBooksDoc } from './docs/get-most-popular-books'
 import { getMostPopularBooks } from '@/http/controllers/books/get-most-popular-books'
 import { getBooksDoc } from './docs/get-books'
+import { getRecommendBooksDoc } from './docs/get-recommend-books'
+import { getSimilarBooksDoc } from './docs/get-recommend-books copy'
 
 export async function booksRoutes(app: FastifyInstance) {
   app.get('/books', getBooksDoc, getBooks)
@@ -34,6 +38,8 @@ export async function booksRoutes(app: FastifyInstance) {
     getIsReadingBooksOfUser
   )
   app.get('/read-books', getReadBooksOfUserDoc, getReadBooksOfUser)
+  app.get('/recommend-books', getRecommendBooksDoc, getRecommendBooks)
+  app.get('/similar-books/:bookId', getSimilarBooksDoc, getSimilarBooks)
   app.get('/read-books/count', countReadBooksOfUserDoc, countReadBooksOfUser)
 
   app.post('/add-favorite-book', addFavoriteBookDoc, addFavoriteBook)

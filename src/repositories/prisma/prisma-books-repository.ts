@@ -39,7 +39,7 @@ export class PrismaBooksRepository implements BooksRepository {
     return book
   }
 
-  async findByTitle(title: string): Promise<BooksDTO | null> {
+  async findByTitle(title: string) {
     const book = await prisma.book.findFirst({
       where: {
         title: {
@@ -52,7 +52,7 @@ export class PrismaBooksRepository implements BooksRepository {
 
     if (!book) return null
 
-    return this.toBooksDTO(book)
+    return book
   }
 
   async findManyBooks(): Promise<BooksDTO[]> {
@@ -174,29 +174,5 @@ export class PrismaBooksRepository implements BooksRepository {
     })
 
     return !!favorite
-  }
-
-  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
-  private toBooksDTO(book: any): BooksDTO {
-    return {
-      id: book.id,
-      title: book.title,
-      urlCover: book.urlCover,
-      bookPath: book.bookPath,
-      synopsis: book.synopsis,
-      publisher: book.publisher,
-      numberPage: book.numberPage,
-      language: book.language,
-      ISBN: book.ISBN,
-      visits: book.visits,
-      writer: {
-        id: book.writer.id,
-        name: book.writer.name,
-      },
-      category: {
-        id: book.bookCategory.id,
-        name: book.bookCategory.name,
-      },
-    }
   }
 }

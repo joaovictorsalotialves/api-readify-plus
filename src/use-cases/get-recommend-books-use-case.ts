@@ -2,18 +2,19 @@ import type { RecommendationProvider } from '@/providers/IAProvider'
 import type { BooksRepository } from '../repositories/books-repository'
 import { PrismaClient } from '@prisma/client'
 import type { BooksDTO } from '@/dtos/Book'
+import { ResourceNotFoundError } from './errors/resource-not-found-error'
 
 const prisma = new PrismaClient()
 
-interface RecommendBooksUseCaseRequest {
+interface GetRecommendBooksUseCaseRequest {
   userId: string
 }
 
-interface RecommendBooksUseCaseResponse {
+interface GetRecommendBooksUseCaseResponse {
   books: BooksDTO[]
 }
 
-export class RecommendBooksUseCase {
+export class GetRecommendBooksUseCase {
   constructor(
     private recommendationProvider: RecommendationProvider,
     private booksRepository: BooksRepository
@@ -21,7 +22,7 @@ export class RecommendBooksUseCase {
 
   async execute({
     userId,
-  }: RecommendBooksUseCaseRequest): Promise<RecommendBooksUseCaseResponse> {
+  }: GetRecommendBooksUseCaseRequest): Promise<GetRecommendBooksUseCaseResponse> {
     // Buscar usuário com relacionamentos necessários
     const user = await prisma.user.findUnique({
       where: { id: userId },
@@ -35,7 +36,7 @@ export class RecommendBooksUseCase {
     })
 
     if (!user) {
-      throw new Error('User not found.')
+      throw new ResourceNotFoundError()
     }
 
     // Títulos favoritos e visitados
@@ -119,14 +120,10 @@ export class RecommendBooksUseCase {
       })
 
     // Buscar objetos completos dos livros recomendados
-    const recommendedBooks: BooksDTO[] = []
-
-    for (const title of recommendedTitles) {
-      const book = await this.booksRepository.findByTitle(title)
-      if (book) {
-        recommendedBooks.push(book)
-      }
-    }
+    const books = await Promise.all(
+      recommendedTitles.map(title => this.booksRepository.findByTitle(title))
+    )
+    const recommendedBooks = books.filter((b): b is BooksDTO => !!b)
 
     return { books: recommendedBooks }
   }

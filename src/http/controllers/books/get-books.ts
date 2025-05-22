@@ -8,8 +8,6 @@ export async function getBooks(request: FastifyRequest, reply: FastifyReply) {
 
     const { books } = await getBooksUseCase.execute()
 
-    console.log(books)
-
     return reply.status(200).send({ books })
   } catch (err) {}
 }

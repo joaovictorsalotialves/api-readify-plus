@@ -1,5 +1,6 @@
+import { env } from '@/env'
 import type { RecommendationProvider } from '../IAProvider'
-import axios from 'axios'
+import { GoogleGenAI } from '@google/genai'
 
 export class GeminiRecommendationProvider implements RecommendationProvider {
   async getRecommendedBooks(input: {
@@ -42,34 +43,19 @@ Com base nas preferências, no histórico de leitura e nos livros já lidos ou e
 ⚠️ NÃO inclua autores, categorias, explicações ou numeração.
     `.trim()
 
-    const response = await axios.post(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent',
-      {
-        contents: [
-          {
-            parts: [{ text: prompt }],
-            role: 'user',
-          },
-        ],
-      },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        params: {
-          key: process.env.GEMINI_API_KEY,
-        },
-      }
-    )
+    const ai = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY })
 
-    const candidates = response.data.candidates
-    const content = candidates?.[0]?.content?.parts?.[0]?.text
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.0-flash',
+      contents: prompt,
+    })
 
-    return (
-      content
+    const candidates =
+      response.text
         ?.split('\n')
         .filter((line: string) => line.trim())
         .map((line: string) => line.trim()) || []
-    )
+
+    return candidates
   }
 }

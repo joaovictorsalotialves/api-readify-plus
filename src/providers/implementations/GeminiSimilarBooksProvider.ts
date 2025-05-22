@@ -1,5 +1,6 @@
+import { env } from '@/env'
 import type { SimilarBooksProvider } from '../IAProvider'
-import axios from 'axios'
+import { GoogleGenAI } from '@google/genai'
 
 export class GeminiSimilarBooksProvider implements SimilarBooksProvider {
   async getSimilarBooks(input: {
@@ -33,21 +34,17 @@ ${availableBooks
 Responda apenas com os títulos dos livros recomendados, um por linha. Sem explicações, sem autores, sem numeração.
     `.trim()
 
-    const response = await axios.post(
-      'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent',
-      {
-        contents: [{ role: 'user', parts: [{ text: prompt }] }],
-      },
-      {
-        headers: { 'Content-Type': 'application/json' },
-        params: { key: process.env.GEMINI_API_KEY },
-      }
-    )
+    const ai = new GoogleGenAI({ apiKey: env.GEMINI_API_KEY })
 
-    const content = response.data?.candidates?.[0]?.content?.parts?.[0]?.text
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.0-flash',
+      contents: prompt,
+    })
+
+    console.log(response.text)
 
     return (
-      content
+      response.text
         ?.split('\n')
         .filter((line: string) => line.trim())
         .map((line: string) => line.trim()) || []

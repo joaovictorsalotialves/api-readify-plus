@@ -9,6 +9,7 @@ const envSchema = z.object({
   SMTP_PORT: z.coerce.number().default(587),
   SMTP_USERNAME: z.string(),
   SMTP_PASSWORD: z.string(),
+  GEMINI_API_KEY: z.string(),
 })
 
 const _env = envSchema.safeParse(process.env)
