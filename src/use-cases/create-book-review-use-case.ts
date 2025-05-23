@@ -7,7 +7,6 @@ import { ResourceNotFoundError } from './errors/resource-not-found-error'
 interface CreateBookReviewUseCaseRequest {
   score: number
   comment: string
-  likes: number
   userId: string
   bookId: string
 }
@@ -26,7 +25,6 @@ export class CreateBookReviewUseCase {
   async execute({
     score,
     comment,
-    likes,
     userId,
     bookId,
   }: CreateBookReviewUseCaseRequest): Promise<CreateBookReviewUseCaseResponse> {
@@ -40,10 +38,10 @@ export class CreateBookReviewUseCase {
     const assessement = await this.assessementsRepository.create({
       score,
       comment,
-      likes,
       user: userId,
       book: bookId,
     })
+    console.log(assessement)
 
     return { assessement }
   }

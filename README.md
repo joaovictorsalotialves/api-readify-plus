@@ -17,7 +17,7 @@
 - [x] Deve ser possível obter os livros lidos pelo usuário logado;
 - [x] Deve ser possível obter a quantidade de livros lidos pelo usuário logado;
 - [x] Deve ser possível obter os livros favoritos do usuário logado;
-- [ ] Deve ser possível obter os livros sugeridos ao usuário logado (Sistema de recomendação com I.A.);
+- [x] Deve ser possível obter os livros sugeridos ao usuário logado (Sistema de recomendação com I.A.);
 - [x] Deve ser possível obter os livros mais populares da plataforma;
 - [x] Deve ser possível buscar livros pelo título;
 - [x] Deve ser possível filtrar livros por gênero textual e/ou escritor;
@@ -45,14 +45,14 @@
 - [x] O usuário quando cadastrar deve ser criado a configuração de leitura padrão e vincular ao usuário;
 - [ ] O usuário só pode editar ou excluir avaliações feitas por ele mesmo;
 - [x] O usuário deve permanecer logado por meio do sistema de autenticação com refresh token;
-- [ ] As recomendações de livros devem levar em consideração os gêneros, escritores e o progresso e engajamento do usuário na leitura;
+- [x] As recomendações de livros devem levar em consideração os gêneros, escritores e o progresso e engajamento do usuário na leitura;
 - [ ] A funcionalidade de leitura em voz alta deve estar disponível para todos os livros, como recurso de acessibilidade;
 
 ## RNFs (Requisitos Não Funcionais)
 
 - [x] A senha do usuário deve estar criptografada;
 - [x] Os dados da aplicação devem estar persistidos em um banco PostgreSQL;
-- [ ] Listas de sugestão de livros devem ser paginadas com 10 livros por página;
+- [x] Listas de sugestão de livros devem retornar no máximo com 10 livros;
 - [ ] Todas as listas de avaliações devem ser paginadas com 5 avaliações por página;
 - [x] O usuário deve ser identificado por um JWT (JSON Web Token);
 - [x] O usuário pode obter um novo JWT por meio de um refresh token (quando já estiver logado);

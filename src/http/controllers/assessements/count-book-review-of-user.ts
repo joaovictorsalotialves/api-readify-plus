@@ -1,6 +1,6 @@
 import type { FastifyRequest, FastifyReply } from 'fastify'
 
-import { makeCountBookReviewOfUserUseCase } from '@/use-cases/factories/make-book-review-use-case'
+import { makeCountBookReviewOfUserUseCase } from '@/use-cases/factories/make-count-book-review-use-case'
 
 export async function countBookReviewOfUser(
   request: FastifyRequest,
