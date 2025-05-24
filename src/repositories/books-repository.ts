@@ -1,4 +1,5 @@
 import type { BooksDTO } from '@/dtos/Book'
+import type { Prisma } from '@prisma/client'
 
 export interface BooksRepository {
   findById(id: string): Promise<BooksDTO | null>
@@ -18,4 +19,5 @@ export interface BooksRepository {
   removeFavoriteBook(bookId: string, userId: string): Promise<void>
   addUserVisitBook(book: BooksDTO, userId: string): Promise<BooksDTO>
   isFavoriteBookOfUser(bookId: string, userId: string): Promise<boolean>
+  save(bookId: string, data: Prisma.BookUpdateInput): Promise<BooksDTO>
 }

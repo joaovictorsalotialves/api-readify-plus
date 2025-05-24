@@ -77,16 +77,20 @@ model FavoriteBooksOfUser {
 }
 
 model Book {
-  id         String @id @default(uuid())
-  title      String
-  urlCover   String @map("url_cover")
-  bookPath   String @map("book_path")
-  synopsis   String
-  publisher  String
-  numberPage Int?   @map("number_page")
-  language   String
-  ISBN       String
-  visits     Int    @default(0)
+  id           String @id @default(uuid())
+  title        String
+  urlCover     String @map("url_cover")
+  bookPath     String @map("book_path")
+  synopsis     String
+  publisher    String
+  numberPage   Int?   @map("number_page")
+  language     String
+  ISBN         String
+  score        Int    @default(0)
+  visits       Int    @default(0)
+  assessements Int    @default(0)
+  read         Int    @default(0)
+  favorite     Int    @default(0)
 
   writer   Writer @relation(fields: [writerId], references: [id])
   writerId String @map("writer_id")

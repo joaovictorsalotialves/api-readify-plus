@@ -17,5 +17,9 @@ export class RemoveFavoriteBookUseCase {
     }
 
     await this.booksRepository.removeFavoriteBook(bookId, userId)
+
+    await this.booksRepository.save(bookId, {
+      favorite: book.favorite ? book.favorite - 1 : 0,
+    })
   }
 }

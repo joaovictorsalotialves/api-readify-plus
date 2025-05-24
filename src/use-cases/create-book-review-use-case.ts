@@ -41,7 +41,19 @@ export class CreateBookReviewUseCase {
       user: userId,
       book: bookId,
     })
-    console.log(assessement)
+
+    const assessements =
+      await this.assessementsRepository.findManyAssessementsOfBook(bookId)
+
+    const newScore = Math.round(
+      assessements.reduce((sum, assessement) => sum + assessement.score, 0) /
+        assessements.length
+    )
+
+    await this.booksRepository.save(book.id, {
+      assessements: (book.assessements ?? 0) + 1,
+      score: newScore,
+    })
 
     return { assessement }
   }

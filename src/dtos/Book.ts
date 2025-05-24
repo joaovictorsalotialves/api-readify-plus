@@ -8,7 +8,12 @@ export type BooksDTO = {
   numberPage: number | null
   language: string
   ISBN: string
+  score: number
   visits: number
+  assessements: number
+  read: number
+  favorite: number
+
   writer: {
     id: string
     name: string

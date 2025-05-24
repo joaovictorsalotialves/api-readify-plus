@@ -1,6 +1,7 @@
 import { prisma } from '@/lib/prisma'
 import type { BooksRepository } from '../books-repository'
 import type { BooksDTO } from '@/dtos/Book'
+import type { Prisma } from '@prisma/client'
 
 export class PrismaBooksRepository implements BooksRepository {
   private bookSelect = {
@@ -14,6 +15,10 @@ export class PrismaBooksRepository implements BooksRepository {
     language: true,
     ISBN: true,
     visits: true,
+    score: true,
+    assessements: true,
+    read: true,
+    favorite: true,
     writer: {
       select: {
         id: true,
@@ -149,10 +154,8 @@ export class PrismaBooksRepository implements BooksRepository {
       },
     })
 
-    const updatedBook = await prisma.book.update({
-      where: { id: book.id },
-      data: { visits: (book.visits ?? 0) + 1 },
-      select: this.bookSelect,
+    const updatedBook = await this.save(book.id, {
+      visits: (book.visits ?? 0) + 1,
     })
 
     return updatedBook
@@ -160,7 +163,7 @@ export class PrismaBooksRepository implements BooksRepository {
 
   async findManyMostPopularBooks(): Promise<BooksDTO[]> {
     const books = await prisma.book.findMany({
-      orderBy: { visits: 'desc' },
+      orderBy: { read: 'desc', assessements: 'desc', visits: 'desc' },
       take: 10,
       select: this.bookSelect,
     })
@@ -174,5 +177,18 @@ export class PrismaBooksRepository implements BooksRepository {
     })
 
     return !!favorite
+  }
+
+  async save(bookId: string, data: Prisma.BookUpdateInput) {
+    await prisma.book.update({
+      data,
+      where: {
+        id: bookId,
+      },
+    })
+
+    const book = await this.findById(bookId)
+
+    return book as BooksDTO
   }
 }

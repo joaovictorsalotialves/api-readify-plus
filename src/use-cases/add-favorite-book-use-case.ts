@@ -17,5 +17,9 @@ export class AddFavoriteBookUseCase {
     }
 
     await this.booksRepository.addFavoriteBook(bookId, userId)
+
+    await this.booksRepository.save(bookId, {
+      favorite: (book.favorite ?? 0) + 1,
+    })
   }
 }

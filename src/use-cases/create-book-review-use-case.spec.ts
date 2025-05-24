@@ -25,6 +25,10 @@ describe('Create Book Review Use Case', () => {
         language: 'English',
         ISBN: '1111111111111',
         visits: 0,
+        assessements: 0,
+        favorite: 0,
+        read: 0,
+        score: 0,
         writerId: 'writer-1',
         bookCategoryId: 'category-1',
       },
@@ -54,10 +58,11 @@ describe('Create Book Review Use Case', () => {
     const { assessement } = await sut.execute({
       score: 4,
       comment: 'Excelente leitura!',
-      likes: 0,
       userId: user.id,
       bookId: 'book-1',
     })
+
+    const book = await booksRepository.findById('book-1')
 
     expect(assessement).toBeTruthy()
     expect(assessement.id).toEqual(expect.any(String))
@@ -65,6 +70,9 @@ describe('Create Book Review Use Case', () => {
     expect(assessement.score).toBe(4)
     expect(assessement.userId).toBe(user.id)
     expect(assessement.bookId).toBe('book-1')
+
+    expect(book?.assessements).toBe(1)
+    expect(book?.score).toBe(4)
   })
 
   it('should throw ResourceNotFoundError if user not exist', async () => {
@@ -72,7 +80,6 @@ describe('Create Book Review Use Case', () => {
       sut.execute({
         score: 5,
         comment: 'Ótimo!',
-        likes: 1,
         userId: 'non-existent-user',
         bookId: 'book-1',
       })
@@ -93,7 +100,6 @@ describe('Create Book Review Use Case', () => {
       sut.execute({
         score: 5,
         comment: 'Ótimo!',
-        likes: 1,
         userId: user.id,
         bookId: 'non-existent-book',
       })

@@ -66,7 +66,11 @@ export class InMemoryBooksRepository implements BooksRepository {
       numberPage: book.numberPage,
       language: book.language,
       ISBN: book.ISBN,
+      score: book.score ?? 0,
       visits: book.visits ?? 0,
+      read: book.read ?? 0,
+      favorite: book.favorite ?? 0,
+      assessements: book.assessements ?? 0,
       writer: {
         id: writer?.id ?? '',
         name: writer?.name ?? '',
@@ -180,7 +184,6 @@ export class InMemoryBooksRepository implements BooksRepository {
       return this.mapToDTO(this.books[bookIndex])
     }
 
-    // Fallback: retorna o DTO original, mas incrementado localmente o visits
     return {
       ...book,
       visits: book.visits + 1,
@@ -198,5 +201,18 @@ export class InMemoryBooksRepository implements BooksRepository {
     return this.favoriteBooksOfUsers.some(
       favorite => favorite.userId === userId && favorite.bookId === bookId
     )
+  }
+
+  async save(bookId: string, data: Partial<Book>): Promise<BooksDTO> {
+    const bookIndex = this.books.findIndex(book => book.id === bookId)
+
+    if (bookIndex >= 0) {
+      this.books[bookIndex] = {
+        ...this.books[bookIndex],
+        ...data,
+      }
+    }
+
+    return this.mapToDTO(this.books[bookIndex])
   }
 }
