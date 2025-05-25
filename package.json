@@ -9,7 +9,8 @@
     "test": "vitest run --dir src/use-cases",
     "test:watch": "vitest --dir src/use-cases",
     "test:coverage": "vitest run --coverage",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "seed": "tsx database/index.js"
   },
   "keywords": [],
   "author": "",

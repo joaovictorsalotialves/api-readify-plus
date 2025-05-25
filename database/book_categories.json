@@ -1,0 +1,15 @@
+{
+"book_categories": [
+	{
+		"id" : "d6b674e7-67bf-4ac1-9b9d-c4dc2eb51122",
+		"name" : "Romance"
+	},
+	{
+		"id" : "42d3c44c-713a-4609-a00f-2af67a22245f",
+		"name" : "Filosofia"
+	},
+	{
+		"id" : "1c802d9d-4b4b-4e85-badf-5639c22a887f",
+		"name" : "Literatura Infantil"
+	}
+]}

@@ -1,0 +1,71 @@
+{
+"writers": [
+	{
+		"id" : "5e59dfbc-464f-444c-836d-239bae7a41ef",
+		"name" : "Machado de Assis"
+	},
+	{
+		"id" : "a250bf0c-ad35-49fb-88e3-7a732933d210",
+		"name" : "Napoleão Hill"
+	},
+	{
+		"id" : "bf402965-ebe4-454f-995c-032a01d6e7aa",
+		"name" : "Sun Tzu"
+	},
+	{
+		"id" : "2debba5a-b726-4292-8401-8456bfc57e3e",
+		"name" : "Platão"
+	},
+	{
+		"id" : "8acf91aa-8cd1-4ea1-abae-ec67d04152bd",
+		"name" : "Santo Agostinho"
+	},
+	{
+		"id" : "3dee6eff-9179-4d8f-92f3-63e7354b92ed",
+		"name" : "José de Alencar"
+	},
+	{
+		"id" : "217e0612-0b0e-4680-9e5d-3f76c8fc03c4",
+		"name" : "Aluísio Azevedo"
+	},
+	{
+		"id" : "3741a934-4f69-4082-b444-3dafee87d8e9",
+		"name" : "Irmãos Grimm"
+	},
+	{
+		"id" : "b146df90-8a61-4fbc-8239-19f86a0da478",
+		"name" : "Antoine de Saint"
+	},
+	{
+		"id" : "7726f2df-78b7-4187-9678-44f91bc0dc5e",
+		"name" : "Marismar Borém"
+	},
+	{
+		"id" : "5aeb0864-3dc3-4561-b397-e0cc6d02672f",
+		"name" : "Graciliano Ramos"
+	},
+	{
+		"id" : "ffb6a436-ebf3-4623-89df-037ef81d2cc5",
+		"name" : "Aristóteles"
+	},
+	{
+		"id" : "d6b339b8-7751-4914-b86d-4019264401d6",
+		"name" : "George Orwell"
+	},
+	{
+		"id" : "021193d2-3517-4965-baba-1d9bcca32f53",
+		"name" : "Alexandre Dumas"
+	},
+	{
+		"id" : "2597225f-1852-4b49-84fd-918c68f9ebcc",
+		"name" : "William Shakespeare"
+	},
+	{
+		"id" : "fb02b0a4-ad61-47b8-8672-1df28f2867db",
+		"name" : "Lewis Carroll"
+	},
+	{
+		"id" : "c0530fbc-2f54-4b77-8c93-18db82ffef5b",
+		"name" : "Fiódor Dostoiévski"
+	}
+]}
