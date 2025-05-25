@@ -18,6 +18,7 @@ import { booksRoutes } from './http/routers/book/bookRouters'
 import { assessementRoutes } from './http/routers/assessements/assessementRouters'
 import { bookCategoriesRoutes } from './http/routers/book-categories/bookCategoriesRouters'
 import { writersRoutes } from './http/routers/writers/writerRouters'
+import { readingsRoutes } from './http/routers/readings/readingsRouters'
 
 export const app = fastify().withTypeProvider<ZodTypeProvider>()
 
@@ -55,6 +56,7 @@ app.register(booksRoutes)
 app.register(assessementRoutes)
 app.register(bookCategoriesRoutes)
 app.register(writersRoutes)
+app.register(readingsRoutes)
 
 app.setErrorHandler((err, _, reply) => {
   if (err.validation && err.code === 'FST_ERR_VALIDATION') {
