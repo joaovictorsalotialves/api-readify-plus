@@ -130,7 +130,7 @@ model Reading {
   startTime    DateTime  @default(now()) @map("start_time")
   endTime      DateTime? @map("end_time")
   duration     Float     @default(0)
-  lastPageRead Int       @default(0) @map("last_page_read")
+  lastPageRead Int       @default(1) @map("last_page_read")
 
   user   User   @relation(fields: [userId], references: [id])
   userId String @map("user_id")
