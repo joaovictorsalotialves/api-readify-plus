@@ -11,7 +11,6 @@ import { removeFavoriteBook } from '@/http/controllers/books/remove-favorite-boo
 import { getBooks } from '@/http/controllers/books/get-books'
 import { getRecommendBooks } from '@/http/controllers/books/get-recommend-books'
 import { getSimilarBooks } from '@/http/controllers/books/get-similar-books'
-import { getBookPdf } from '@/http/controllers/books/get-book-pdf'
 
 import { getBookDoc } from './docs/get-book'
 import { searchBooksDoc } from './docs/search-books'
@@ -26,13 +25,11 @@ import { getMostPopularBooks } from '@/http/controllers/books/get-most-popular-b
 import { getBooksDoc } from './docs/get-books'
 import { getRecommendBooksDoc } from './docs/get-recommend-books'
 import { getSimilarBooksDoc } from './docs/get-similar-books'
-import { verifyJWT } from '@/http/middlewares/verify-jwt'
 
 export async function booksRoutes(app: FastifyInstance) {
   app.get('/books', getBooksDoc, getBooks)
   app.get('/books/search', searchBooksDoc, searchBook)
   app.get('/books/:bookId', getBookDoc, getBook)
-  app.get('/books/:bookId/pdf', { onRequest: [verifyJWT] }, getBookPdf)
   app.get('/most-popular-books', getMostPopularBooksDoc, getMostPopularBooks)
   app.get('/favorite-books', getFavoriteBooksOfUserDoc, getFavoriteBooksOfUser)
   app.get(
