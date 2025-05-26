@@ -9,8 +9,11 @@ import {
 import fastifySwagger from '@fastify/swagger'
 import fastifySwaggerUi from '@fastify/swagger-ui'
 import fastifyCors from '@fastify/cors'
+import fastifyStatic from '@fastify/static'
 
 import { env } from './env'
+import path from 'node:path'
+import fs from 'node:fs'
 
 import { usersRoutes } from './http/routers/users/userRouters'
 import { authRoutes } from './http/routers/auth/authRouters'
@@ -57,6 +60,12 @@ app.register(assessementRoutes)
 app.register(bookCategoriesRoutes)
 app.register(writersRoutes)
 app.register(readingsRoutes)
+
+app.register(fastifyStatic, {
+  root: path.resolve(__dirname, '..', 'assets', 'e-books'),
+  prefix: '/e-books/', // URL base: http://localhost:3333/e-books/
+  decorateReply: false, // desnecessário se você não vai customizar `reply.sendFile`
+})
 
 app.setErrorHandler((err, _, reply) => {
   if (err.validation && err.code === 'FST_ERR_VALIDATION') {

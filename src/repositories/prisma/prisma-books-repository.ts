@@ -176,7 +176,7 @@ export class PrismaBooksRepository implements BooksRepository {
 
   async findManyMostPopularBooks(): Promise<BooksDTO[]> {
     const books = await prisma.book.findMany({
-      orderBy: { read: 'desc', assessements: 'desc', visits: 'desc' },
+      orderBy: [{ read: 'desc' }, { assessements: 'desc' }, { visits: 'desc' }],
       take: 10,
       select: this.bookSelect,
     })

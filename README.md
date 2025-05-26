@@ -26,17 +26,17 @@
 - [x] Deve ser possível remover um livro da lista de favoritos;
 - [ ] Deve ser possível obter o texto do livro para leitura;
 - [ ] Deve ser possível converter o texto do livro em áudio;
-- [x] Deve ser possível dar um like em uma avaliação;  //
-- [x] Deve ser possível remover o like em uma avaliação;  //
-- [x] Deve ser possível gerar uma avaliação do livro;  //
+- [x] Deve ser possível dar um like em uma avaliação; 
+- [x] Deve ser possível remover o like em uma avaliação; 
+- [x] Deve ser possível gerar uma avaliação do livro; 
 - [ ] Deve ser possível obter as avaliações de um livro;
 - [ ] Deve ser possível obter uma avaliação;
 - [ ] Deve ser possível editar uma avaliação do livro;
 - [ ] Deve ser possível excluir uma avaliação do livro;
 - [x] Deve ser possível obter a quantidade de comentarios feitos pelo usuário logado; 
 - [x] Deve ser possível controlar visitas na página de um livro;
-- [ ] Deve ser possível controlar o progresso da leitura do livro; //
-- [ ] Deve ser possível obter o progresso da leitura do livro; //
+- [x] Deve ser possível controlar o progresso da leitura do livro; 
+- [x] Deve ser possível obter o progresso da leitura do livro; 
 
 ## RNs (Regras de Negócio)
 
@@ -56,7 +56,7 @@
 - [ ] Todas as listas de avaliações devem ser paginadas com 5 avaliações por página;
 - [x] O usuário deve ser identificado por um JWT (JSON Web Token);
 - [x] O usuário pode obter um novo JWT por meio de um refresh token (quando já estiver logado);
-- [ ] Os livros devem ser armazenados em arquivos PDF;
+- [x] Os livros devem ser armazenados em arquivos PDF;
 - [x] Para recuperação de senha, o usuário deve receber um e-mail com um código de 6 dígitos;
-- [ ] As respostas das recomendações baseadas em IA devem ser entregues em até 2 segundos para manter a fluidez da experiência;
-- [ ] O processamento de dados sensíveis para recomendações deve seguir políticas de privacidade;
+- [x] As respostas das recomendações baseadas em IA devem ser entregues em até 3 segundos para manter a fluidez da experiência;
+- [x] O processamento de dados sensíveis para recomendações deve seguir políticas de privacidade;

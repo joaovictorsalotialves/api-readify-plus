@@ -11,5 +11,7 @@ export async function getMostPopularBooks(
     const { books } = await getMostPopularBooksUseCase.execute()
 
     return reply.status(200).send({ books })
-  } catch (err) {}
+  } catch (err) {
+    console.log(err)
+  }
 }
