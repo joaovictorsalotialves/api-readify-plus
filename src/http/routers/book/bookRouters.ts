@@ -24,7 +24,7 @@ import { getMostPopularBooksDoc } from './docs/get-most-popular-books'
 import { getMostPopularBooks } from '@/http/controllers/books/get-most-popular-books'
 import { getBooksDoc } from './docs/get-books'
 import { getRecommendBooksDoc } from './docs/get-recommend-books'
-import { getSimilarBooksDoc } from './docs/get-recommend-books copy'
+import { getSimilarBooksDoc } from './docs/get-similar-books'
 
 export async function booksRoutes(app: FastifyInstance) {
   app.get('/books', getBooksDoc, getBooks)

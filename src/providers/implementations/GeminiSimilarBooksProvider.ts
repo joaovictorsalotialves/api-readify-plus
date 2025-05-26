@@ -41,8 +41,6 @@ Responda apenas com os títulos dos livros recomendados, um por linha. Sem expli
       contents: prompt,
     })
 
-    console.log(response.text)
-
     return (
       response.text
         ?.split('\n')

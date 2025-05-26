@@ -22,5 +22,7 @@ export async function getBook(request: FastifyRequest, reply: FastifyReply) {
         message: err.message,
       })
     }
+
+    throw err
   }
 }

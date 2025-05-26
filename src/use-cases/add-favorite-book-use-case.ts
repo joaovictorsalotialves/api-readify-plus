@@ -16,10 +16,15 @@ export class AddFavoriteBookUseCase {
       throw new ResourceNotFoundError()
     }
 
-    await this.booksRepository.addFavoriteBook(bookId, userId)
+    const addFavorite = await this.booksRepository.addFavoriteBook(
+      bookId,
+      userId
+    )
 
-    await this.booksRepository.save(bookId, {
-      favorite: (book.favorite ?? 0) + 1,
-    })
+    if (addFavorite) {
+      await this.booksRepository.save(bookId, {
+        favorite: (book.favorite ?? 0) + 1,
+      })
+    }
   }
 }

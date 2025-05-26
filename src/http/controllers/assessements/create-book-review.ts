@@ -11,8 +11,6 @@ export async function createBookReview(
     request.body
   )
 
-  console.log(score, comment, bookId)
-
   const createBookReviewUseCase = makeCreateBookReviewUseCase()
 
   const { assessement } = await createBookReviewUseCase.execute({

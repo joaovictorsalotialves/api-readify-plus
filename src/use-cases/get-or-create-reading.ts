@@ -41,6 +41,8 @@ export class GetOrCreateReadingUseCase {
         user: userId,
         book: bookId,
       })
+
+      await this.booksRepository.save(bookId, { read: book.read + 1 })
     }
 
     return { reading }

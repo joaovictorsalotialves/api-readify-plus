@@ -16,10 +16,15 @@ export class RemoveFavoriteBookUseCase {
       throw new ResourceNotFoundError()
     }
 
-    await this.booksRepository.removeFavoriteBook(bookId, userId)
+    const removeFavorite = await this.booksRepository.removeFavoriteBook(
+      bookId,
+      userId
+    )
 
-    await this.booksRepository.save(bookId, {
-      favorite: book.favorite ? book.favorite - 1 : 0,
-    })
+    if (removeFavorite) {
+      await this.booksRepository.save(bookId, {
+        favorite: book.favorite ? book.favorite - 1 : 0,
+      })
+    }
   }
 }

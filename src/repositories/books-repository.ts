@@ -15,8 +15,8 @@ export interface BooksRepository {
   findManyIsReadingBooksOfUser(userId: string): Promise<BooksDTO[]>
   findManyReadBooksOfUser(userId: string): Promise<BooksDTO[]>
   countReadBooksOfUser(userId: string): Promise<number>
-  addFavoriteBook(bookId: string, userId: string): Promise<void>
-  removeFavoriteBook(bookId: string, userId: string): Promise<void>
+  addFavoriteBook(bookId: string, userId: string): Promise<boolean>
+  removeFavoriteBook(bookId: string, userId: string): Promise<boolean>
   addUserVisitBook(book: BooksDTO, userId: string): Promise<BooksDTO>
   isFavoriteBookOfUser(bookId: string, userId: string): Promise<boolean>
   save(bookId: string, data: Prisma.BookUpdateInput): Promise<BooksDTO>

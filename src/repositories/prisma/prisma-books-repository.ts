@@ -131,22 +131,35 @@ export class PrismaBooksRepository implements BooksRepository {
     return readBooks.length
   }
 
-  async addFavoriteBook(bookId: string, userId: string): Promise<void> {
+  async addFavoriteBook(bookId: string, userId: string) {
     const isAlreadyFavorite = await this.isFavoriteBookOfUser(bookId, userId)
+
     if (!isAlreadyFavorite) {
       await prisma.favoriteBooksOfUser.create({
         data: { userId, bookId },
       })
+
+      return true
     }
+
+    return false
   }
 
-  async removeFavoriteBook(bookId: string, userId: string): Promise<void> {
-    await prisma.favoriteBooksOfUser.deleteMany({
-      where: { userId, bookId },
-    })
+  async removeFavoriteBook(bookId: string, userId: string) {
+    const isAlreadyFavorite = await this.isFavoriteBookOfUser(bookId, userId)
+
+    if (isAlreadyFavorite) {
+      await prisma.favoriteBooksOfUser.deleteMany({
+        where: { userId, bookId },
+      })
+
+      return true
+    }
+
+    return false
   }
 
-  async addUserVisitBook(book: BooksDTO, userId: string): Promise<BooksDTO> {
+  async addUserVisitBook(book: BooksDTO, userId: string) {
     await prisma.userVisitBook.create({
       data: {
         userId,
@@ -171,7 +184,7 @@ export class PrismaBooksRepository implements BooksRepository {
     return books
   }
 
-  async isFavoriteBookOfUser(bookId: string, userId: string): Promise<boolean> {
+  async isFavoriteBookOfUser(bookId: string, userId: string) {
     const favorite = await prisma.favoriteBooksOfUser.findFirst({
       where: { bookId, userId },
     })

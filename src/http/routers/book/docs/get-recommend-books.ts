@@ -20,6 +20,10 @@ export const getRecommendBooksDoc = {
             language: z.string(),
             ISBN: z.string(),
             visits: z.coerce.number(),
+            score: z.coerce.number(),
+            favorite: z.coerce.number(),
+            assessements: z.coerce.number(),
+            read: z.coerce.number(),
             writer: z.object({
               id: z.string().uuid(),
               name: z.string(),

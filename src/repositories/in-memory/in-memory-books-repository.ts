@@ -161,13 +161,27 @@ export class InMemoryBooksRepository implements BooksRepository {
 
     if (!alreadyFavorited) {
       this.favoriteBooksOfUsers.push({ bookId, userId })
+
+      return true
     }
+
+    return false
   }
 
   async removeFavoriteBook(bookId: string, userId: string) {
-    this.favoriteBooksOfUsers = this.favoriteBooksOfUsers.filter(
-      favorite => !(favorite.userId === userId && favorite.bookId === bookId)
+    const alreadyFavorited = this.favoriteBooksOfUsers.some(
+      favorite => favorite.userId === userId && favorite.bookId === bookId
     )
+
+    if (alreadyFavorited) {
+      this.favoriteBooksOfUsers = this.favoriteBooksOfUsers.filter(
+        favorite => !(favorite.userId === userId && favorite.bookId === bookId)
+      )
+
+      return true
+    }
+
+    return false
   }
 
   async addUserVisitBook(book: BooksDTO, userId: string): Promise<BooksDTO> {
