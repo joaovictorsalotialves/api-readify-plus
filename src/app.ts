@@ -63,8 +63,14 @@ app.register(readingsRoutes)
 
 app.register(fastifyStatic, {
   root: path.resolve(__dirname, '..', 'assets', 'e-books'),
-  prefix: '/e-books/', // URL base: http://localhost:3333/e-books/
-  decorateReply: false, // desnecessário se você não vai customizar `reply.sendFile`
+  prefix: '/e-books/',
+  decorateReply: false,
+})
+
+app.register(fastifyStatic, {
+  root: path.resolve(__dirname, '..', 'assets', 'covers'),
+  prefix: '/covers/',
+  decorateReply: false,
 })
 
 app.setErrorHandler((err, _, reply) => {

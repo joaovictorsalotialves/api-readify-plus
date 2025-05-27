@@ -43,5 +43,5 @@ export async function booksRoutes(app: FastifyInstance) {
   app.get('/read-books/count', countReadBooksOfUserDoc, countReadBooksOfUser)
 
   app.post('/add-favorite-book', addFavoriteBookDoc, addFavoriteBook)
-  app.delete('/remove-favorite-book', removeFavoriteBookDoc, removeFavoriteBook)
+  app.post('/remove-favorite-book', removeFavoriteBookDoc, removeFavoriteBook)
 }
