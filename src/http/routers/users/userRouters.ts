@@ -14,7 +14,7 @@ import { editReadingSettingDoc } from './docs/edit-reading-setting'
 import { getReadingSettingDoc } from './docs/get-reading-setting'
 
 export async function usersRoutes(app: FastifyInstance) {
-  app.post('/users', registerDoc, register)
+  app.post('/register', registerDoc, register)
   app.get('/me', getUserProfileDoc, getUserProfile)
   app.put('/users', editUserProfileDoc, editUserProfile)
   app.patch('/users/password', editPasswordDoc, editPassword)
