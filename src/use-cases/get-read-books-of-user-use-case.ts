@@ -1,13 +1,14 @@
 import type { Book } from '@prisma/client'
 
 import type { BooksRepository } from '@/repositories/books-repository'
+import type { BooksDTO } from '@/dtos/Book'
 
 interface GetReadBooksOfUserUseCaseRequest {
   userId: string
 }
 
 interface GetReadBooksOfUserUseCaseResponse {
-  books: Book[]
+  books: BooksDTO[]
 }
 
 export class GetReadBooksOfUserUseCase {
