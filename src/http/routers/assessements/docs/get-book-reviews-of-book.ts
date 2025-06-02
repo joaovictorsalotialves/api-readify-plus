@@ -16,6 +16,9 @@ export const getBookReviewsOfBookDoc = {
             likes: z.coerce.number(),
             userId: z.string().uuid(),
             bookId: z.string().uuid(),
+            user: z.object({
+              username: z.string(),
+            }),
           })
         ),
       }),

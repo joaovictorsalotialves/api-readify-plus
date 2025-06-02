@@ -4,6 +4,7 @@ import type {
   AssessementsRepository,
 } from '../assessements-repository'
 import type { Assessement } from '@prisma/client'
+import type { AssessementDTO } from '@/dtos/Assessement'
 
 export class PrismaAssessementsRepository implements AssessementsRepository {
   async findById(id: string): Promise<Assessement | null> {
@@ -12,9 +13,16 @@ export class PrismaAssessementsRepository implements AssessementsRepository {
     })
   }
 
-  async findManyAssessementsOfBook(bookId: string): Promise<Assessement[]> {
+  async findManyAssessementsOfBook(bookId: string): Promise<AssessementDTO[]> {
     return await prisma.assessement.findMany({
       where: { bookId },
+      include: {
+        user: {
+          select: {
+            username: true,
+          },
+        },
+      },
     })
   }
 
@@ -38,6 +46,7 @@ export class PrismaAssessementsRepository implements AssessementsRepository {
   }
 
   async remove(assessementId: string): Promise<void> {
+    console.log(assessementId)
     // Remove likes relacionados antes por constraints de FK
     await prisma.userLikeAssessement.deleteMany({
       where: { assessementId },

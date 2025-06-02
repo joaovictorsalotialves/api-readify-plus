@@ -5,12 +5,14 @@ import { likeBookReview } from '@/http/controllers/assessements/like-book-review
 import { removeLikeBookReview } from '@/http/controllers/assessements/remove-like-book-review'
 import { createBookReview } from '@/http/controllers/assessements/create-book-review'
 import { getBookReviewsOfBook } from '@/http/controllers/assessements/get-book-reviews-of-book'
+import { removeBookReview } from '@/http/controllers/assessements/remove-book-review'
 
 import { countBookReviewOfUserDoc } from './docs/count-book-review-of-user'
 import { likeBookReviewDoc } from './docs/like-book-review'
 import { removeLikeBookReviewDoc } from './docs/remove-like-book-review'
 import { createBookReviewDoc } from './docs/create-book-review'
 import { getBookReviewsOfBookDoc } from './docs/get-book-reviews-of-book'
+import { removeBookReviewDoc } from './docs/remove-book-review'
 
 export async function assessementRoutes(app: FastifyInstance) {
   app.get(
@@ -30,4 +32,5 @@ export async function assessementRoutes(app: FastifyInstance) {
     removeLikeBookReviewDoc,
     removeLikeBookReview
   )
+  app.post('/remove-book-review', removeBookReviewDoc, removeBookReview)
 }

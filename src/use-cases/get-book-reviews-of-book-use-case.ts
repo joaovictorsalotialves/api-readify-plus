@@ -1,13 +1,12 @@
-import type { Assessement } from '@prisma/client'
-
 import type { AssessementsRepository } from '@/repositories/assessements-repository'
+import type { AssessementDTO } from '@/dtos/Assessement'
 
 interface GetBookReviewsUseCaseRequest {
   bookId: string
 }
 
 interface GetBookReviewsUseCaseResponse {
-  assessement: Assessement[]
+  assessement: AssessementDTO[]
 }
 
 export class GetBookReviewsUseCase {
